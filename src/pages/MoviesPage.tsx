@@ -1,17 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import MovieList from "../components/MovieList";
+import AdminMovieApi from "../api/AdminMovieApi";
 
 
 function MoviePage() {
-    /*Work on this tmr
     const [movieItems, setMovieItems] = useState([]);
 
+    /*
     const addItem = (title, description) => {
         
     }*/
 
+    
+    //Refresh table
+    useEffect(() => {
+        refreshMovieList();
+    },[])
+
+    const refreshMovieList = () => {
+        AdminMovieApi.getMovies()
+        .then(data => setMovieItems(data))
+        .catch(error => console.log(error));
+    }
+
+
+
     return (
         <div className="container">
-            Welcome to MoviePage
+            <MovieList movieItems={movieItems}/>
         </div>
     )
 }
