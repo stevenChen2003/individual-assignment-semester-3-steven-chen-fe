@@ -6,12 +6,6 @@ import AdminMovieApi from "../api/AdminMovieApi";
 function MoviePage() {
     const [movieItems, setMovieItems] = useState([]);
 
-    /*
-    const addItem = (title, description) => {
-        
-    }*/
-
-    
     //Refresh table
     useEffect(() => {
         refreshMovieList();
