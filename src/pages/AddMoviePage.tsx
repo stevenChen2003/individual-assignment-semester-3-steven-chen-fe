@@ -1,6 +1,5 @@
-import React from 'react'
 import AddMovieForm from '../components/AddMovieForm'
-import AdminMovieApi from '../api/AdminMovieApi'
+import AdminMovieApi from '../api/adminApi/AdminMovieApi'
 
 export default function AddMoviePage() {
 
