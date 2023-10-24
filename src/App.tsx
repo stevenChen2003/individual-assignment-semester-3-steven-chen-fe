@@ -1,7 +1,7 @@
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import NavBar from './components/NavBar';
-import MoviePage from './pages/MoviesPage';
-import AddMoviePage from './pages/AddMoviePage';
+import NavBar from "./components/commonComponents/NavBar";
+import MoviePage from "./pages/adminPages/MoviesPage";
+import AddMoviePage from "./pages/adminPages/AddMoviePage";
 
 function App() {
   return (

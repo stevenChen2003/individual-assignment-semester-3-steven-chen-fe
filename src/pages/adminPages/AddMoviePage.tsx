@@ -1,5 +1,5 @@
-import AddMovieForm from '../components/AddMovieForm'
-import AdminMovieApi from '../api/adminApi/AdminMovieApi'
+import AddMovieForm from "../../components/adminComponents/AddMovieForm";
+import AdminMovieApi from "../../api/adminApi/AdminMovieApi";
 
 export default function AddMoviePage() {
 
@@ -7,12 +7,12 @@ export default function AddMoviePage() {
     
     AdminMovieApi.postMovie(newMovie)
     .then(response => {
-      console.log('Movie added successfully:', response);
+      console.log("Movie added successfully:", response);
       alert('Movie added successfully');
     })
     .catch(error => {
       if (error.response.status === 400) {
-        console.log('Movie already exists error:', error.response.data);
+        console.log("Movie already exists error:", error.response.data);
         alert("Movie already exists");
       } else {
         alert("Sorry, something went wrong");

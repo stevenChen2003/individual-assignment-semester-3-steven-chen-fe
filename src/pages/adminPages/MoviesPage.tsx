@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import MovieList from "../components/MovieList";
-import AdminMovieApi from "../api/AdminMovieApi";
+import MovieList from "../../components/adminComponents/MovieList";
+import AdminMovieApi from "../../api/adminApi/AdminMovieApi";
 
 
 function MoviePage() {
