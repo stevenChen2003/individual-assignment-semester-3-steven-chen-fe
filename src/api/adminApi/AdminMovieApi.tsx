@@ -1,11 +1,13 @@
 import axios from "axios";
 
+axios.defaults.baseURL = "http://localhost:8080";
+
 const AdminMovieApi = {
 
-    getMovies: () => axios.get("http://localhost:8080/movies")
-    .then(repsonse => repsonse.data.movies),
+    getMovies: () => axios.get("/movies")
+    .then(response => response.data.movies),
 
-    postMovie: (newMovie) => axios.post("http://localhost:8080/movies", newMovie)
+    postMovie: (newMovie) => axios.post("/movies", newMovie)
 
 }
 
