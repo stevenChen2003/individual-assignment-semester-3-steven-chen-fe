@@ -1,16 +1,18 @@
-import React from 'react'
+import React from 'react';
+import logo from '../../assets/images/logo.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 
 
 export default function NavBar() {
 
-
-
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">Navbar</Link>
+        <Link className="navbar-brand" to="/">
+          <img src={logo} alt="Logo"  width={170} height={55}/>
+        </Link>
+
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -19,9 +21,6 @@ export default function NavBar() {
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/">Movie List</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link active" to="/addMovie">Add Movie</Link>
             </li>
           </ul>
 
