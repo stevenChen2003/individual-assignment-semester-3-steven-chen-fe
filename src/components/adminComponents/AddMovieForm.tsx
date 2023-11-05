@@ -1,23 +1,36 @@
 import React, { useState } from 'react';
 
 const AddMovieForm = ({ onAddMovie }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+
+  const [movie, setMovie] = useState({
+    id: 0,
+    title: '',
+    description: '',
+    genre: '',
+    rating: 0,
+    releaseDate: '',
+    durationInMin: 0,
+  });
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newMovie = {
-      title,
-      description,
-    };
-    onAddMovie(newMovie);
+
+    onAddMovie(movie);
     // Clear the form fields
-    setTitle('');
-    setDescription('');
+    setMovie({
+      id: 0,
+      title: '',
+      description: '',
+      genre: '',
+      rating: 0,
+      releaseDate: '',
+      durationInMin: 0,
+    })
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="title" className="form-label">
           Title
@@ -26,8 +39,8 @@ const AddMovieForm = ({ onAddMovie }) => {
           type="text"
           id="title"
           className="form-control"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={movie.title}
+          onChange={(e) => setMovie({ ...movie, title: e.target.value })}
           required
         />
       </div>
@@ -38,8 +51,48 @@ const AddMovieForm = ({ onAddMovie }) => {
         <textarea
           id="description"
           className="form-control"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={movie.description}
+          onChange={(e) => setMovie({ ...movie, description: e.target.value })}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="genre" className="form-label">
+          Genre
+        </label>
+        <input
+          type="text"
+          id="genre"
+          className="form-control"
+          value={movie.genre}
+          onChange={(e) => setMovie({ ...movie, genre: e.target.value })}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="releaseDate" className="form-label">
+          Release Date
+        </label>
+        <input
+          type="date"
+          id="releaseDate"
+          className="form-control"
+          value={movie.releaseDate}
+          onChange={(e) => setMovie({ ...movie, releaseDate: e.target.value })}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="durationInMin" className="form-label">
+          Duration (in minutes)
+        </label>
+        <input
+          type="number"
+          id="durationInMin"
+          min="0"
+          className="form-control"
+          value={movie.durationInMin}
+          onChange={(e) => setMovie({ ...movie, durationInMin: parseInt(e.target.value) })}
           required
         />
       </div>
