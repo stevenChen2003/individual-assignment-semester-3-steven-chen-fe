@@ -1,29 +1,36 @@
 import React from 'react';
+import MovieItem from './MovieItem';
 
 export default function MovieList(props) {
   
-  const { movieItems } = props;
+  const { movieItems, refreshMovieList } = props;
+
+  const containerStyle = {
+    maxHeight: '500px', 
+    overflowY: 'auto', 
+  };
+  
 
   return (
-    <table className="table table-striped mt-3">
-      <thead>
-        <tr>
+    <div style={containerStyle}>
+      <table className='table table-striped mt-3'>
+        <thead className='sticky-top'>
           <th>Movie ID</th>
           <th>Title</th>
-          <th>Description</th>
+          <th>Genre</th>
           <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        {movieItems.map((movie) => (
-          <tr key={movie.movieId}>
-            <td>{movie.movieId}</td>
-            <td>{movie.title}</td>
-            <td>{movie.description}</td>
-            <td>{movie.rating}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  )
+          <th></th>
+        </thead>
+        <tbody>
+          {movieItems.map((movie) => 
+          (
+            <MovieItem key={movie.id} movie={movie} refreshMovieList={refreshMovieList}/>
+          ))}
+        </tbody>
+      </table>
+
+
+    </div>
+
+  );
 }
