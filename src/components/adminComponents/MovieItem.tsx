@@ -1,8 +1,9 @@
 import React from 'react'
 import AdminMovieApi from '../../api/adminApi/AdminMovieApi';
+import { useNavigate } from 'react-router-dom';
 
 export default function MovieItem(props) {
-
+    const navigate = useNavigate();
     const {movie, refreshMovieList} = props;
 
     const handleDeleteMovie = () => {
@@ -12,6 +13,10 @@ export default function MovieItem(props) {
         .then(response => {refreshMovieList()})
     }
 
+    const handleNavigateEditMovie = () => {
+        navigate("/editMovie/" + movie.movieId)
+    }
+
     return (
         <tr>
             <td>{movie.movieId}</td>
@@ -19,7 +24,7 @@ export default function MovieItem(props) {
             <td>{movie.genre}</td>
             <td>{movie.rating}</td>
             <td className="d-flex">
-                <button className="btn btn-primary mx-2">
+                <button className="btn btn-primary mx-2" onClick={handleNavigateEditMovie}>
                     Edit
                 </button>
                 <button className="btn btn-danger" onClick={handleDeleteMovie}>
