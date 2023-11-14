@@ -1,0 +1,17 @@
+/*background*/
+.background-wrapper {
+    margin-top: -11vh;
+}
+
+/*Log in form*/
+.login-box {
+    width: 50vh;
+    align-items: center;
+    border-radius: 13px;
+    background-color: #272829;
+}
+  
+.login-form form {
+    font-size: 15px;
+    margin-top: 30px;
+}
