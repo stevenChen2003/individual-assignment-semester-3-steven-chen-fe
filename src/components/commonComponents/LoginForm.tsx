@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
+import AuthAPI from '../../api/AuthApi';
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
@@ -7,7 +8,9 @@ export default function LoginForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Here you would typically send a request to your backend to authenticate the user
+        AuthAPI.login(email, password)
+        .catch(() => alert("Login failed!"))
+        .catch(error => console.error(error));
         console.log(`Email: ${email}, Password: ${password}`);
     };
 

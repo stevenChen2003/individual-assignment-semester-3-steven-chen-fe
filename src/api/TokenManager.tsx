@@ -1,27 +1,24 @@
-import { jwtDecode, JwtPayload } from 'jwt-decode';
-
-let userData: { accessToken: string | undefined, claims: JwtPayload | undefined } = {
-  accessToken: undefined,
-  claims: undefined
-}
+import jwt_decode from "jwt-decode";
 
 const TokenManager = {
-  getAccessToken: () => userData.accessToken,
+  getAccessToken: () => sessionStorage.getItem("accessToken"),
   getClaims: () => {
-      if (!userData.claims) {
+      if (!sessionStorage.getItem("claims")) {
           return undefined;
       }
-      return userData.claims;
+      return JSON.parse(sessionStorage.getItem("claims"));
   },
-  setAccessToken: (token: string) => {
-      userData = { ...userData, accessToken: token };
-      const claims = jwtDecode<JwtPayload>(token);
-      userData = { ...userData, claims: claims };
+  setAccessToken: (token) => {
+      sessionStorage.setItem("accessToken", token);
+      const claims = jwt_decode(token);
+      sessionStorage.setItem("claims", JSON.stringify(claims));
       return claims;
   },
   clear: () => {
-      userData = { ...userData, accessToken: undefined, claims: undefined };
+      sessionStorage.removeItem("accessToken");
+      sessionStorage.removeItem("claims");
   }
 }
 
 export default TokenManager;
+
