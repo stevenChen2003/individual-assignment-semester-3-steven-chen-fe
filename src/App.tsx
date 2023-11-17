@@ -6,7 +6,6 @@ import AddMoviePage from "./pages/adminPages/AddMoviePage";
 import EditMoviePage from "./pages/adminPages/EditMoviePage";
 import LoginForm from "./components/commonComponents/LoginForm";
 import PrivateRoute from "./pages/PrivateRoute";
-import TokenManager from "./api/TokenManager";
 
 function App() {
   
