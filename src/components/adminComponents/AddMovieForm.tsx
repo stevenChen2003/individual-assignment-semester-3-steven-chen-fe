@@ -10,6 +10,7 @@ const AddMovieForm = ({ onAddMovie }) => {
     rating: 0,
     releaseDate: '',
     durationInMin: 0,
+    // imageFile: null, 
   });
 
 
@@ -26,6 +27,7 @@ const AddMovieForm = ({ onAddMovie }) => {
       rating: 0,
       releaseDate: '',
       durationInMin: 0,
+      // imageFile: null, 
     })
   };
 
@@ -96,6 +98,19 @@ const AddMovieForm = ({ onAddMovie }) => {
           required
         />
       </div>
+      {/* <div className="mb-3">
+        <label htmlFor="imageFile" className="form-label">
+          Upload Image
+        </label>
+        <input
+          type="file"
+          id="imageFile"
+          className="form-control"
+          onChange={(e) => setMovie({ ...movie, imageFile: e.target.files[0] })}
+          accept="image/*" // Accept only image files
+          required
+        />
+      </div> */}
       <button type="submit" className="btn btn-primary">
         Add Movie
       </button>
