@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../../assets/images/logo.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,9 +8,16 @@ export default function NavBar() {
   const navigate = useNavigate();
   const isLoggedIn = TokenManager.getAccessToken() !== null;
 
+  //Button
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const handleLogout = () => {
     TokenManager.clear();
     navigate('/');
+  };
+
+  const toggleNavbar = () => {
+    setIsExpanded(!isExpanded);
   };
 
   return (
@@ -20,11 +27,18 @@ export default function NavBar() {
           <img src={logo} alt="Logo" width={170} height={55} />
         </Link>
 
-        <button className="navbar-toggler" type="button" aria-label="Toggle navigation">
+        <button
+          className="navbar-toggler"
+          type="button"
+          aria-label="Toggle navigation"
+          onClick={toggleNavbar}
+          data-toggle="collapse"
+          data-target="#navbarNav"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="navbar-collapse" id="navbarNav">
+        <div className={`collapse navbar-collapse${isExpanded ? ' show' : ''}`} id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/">
