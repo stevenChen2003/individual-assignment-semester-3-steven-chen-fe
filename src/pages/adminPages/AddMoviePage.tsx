@@ -1,12 +1,12 @@
 import AddMovieForm from "../../components/adminComponents/AddMovieForm";
-import AdminMovieApi from "../../api/adminApi/AdminMovieApi";
+import MovieApi from "../../api/adminApi/MovieApi";
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function AddMoviePage() {
 
   const handleAddMovie = (newMovie) => {
     
-    AdminMovieApi.postMovie(newMovie)
+    MovieApi.postMovie(newMovie)
     .then(response => {
       console.log("Movie added successfully:", response);
       toast.success('Movie added successfully');

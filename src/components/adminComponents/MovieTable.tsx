@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieItem from './MovieItem';
 
-export default function MovieList(props) {
+export default function MovieTable(props) {
   
   const { movieItems, refreshMovieList } = props;
 

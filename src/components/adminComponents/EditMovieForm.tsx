@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import AdminMovieApi from '../../api/adminApi/AdminMovieApi';
+import MovieApi from '../../api/adminApi/MovieApi';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,7 +17,7 @@ export default function EditMovieForm(props) {
   });
 
   const getMovieInformation = () => {
-    AdminMovieApi.getMovie(props.movieId)
+    MovieApi.getMovie(props.movieId)
     .then(data => {
       
       const formattedDate = data.releaseDate.split('T')[0];
@@ -34,7 +34,7 @@ export default function EditMovieForm(props) {
   //Update function
   const handleSubmit = (e) => {
     e.preventDefault();
-    AdminMovieApi.updateMovie(movie)
+    MovieApi.updateMovie(movie)
     .then(response => {
       showToast("Update succesfully", "success")
 

@@ -3,7 +3,7 @@ import TokenManager from "../TokenManager";
 
 axios.defaults.baseURL = "http://localhost:8080";
 
-const AdminMovieApi = {
+const MovieApi = {
 
     getMovies: () => axios.get(`/movies`)
     .then(response => response.data.movies),
@@ -28,4 +28,4 @@ const AdminMovieApi = {
 
 }
 
-export default AdminMovieApi
+export default MovieApi

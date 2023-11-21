@@ -6,6 +6,7 @@ import AddMoviePage from "./pages/adminPages/AddMoviePage";
 import EditMoviePage from "./pages/adminPages/EditMoviePage";
 import LoginForm from "./components/commonComponents/LoginForm";
 import PrivateRoute from "./pages/PrivateRoute";
+import HomePage from "./pages/HomePage";
 
 function App() {
   
@@ -14,6 +15,7 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
+          <Route path="/homePage" element={<HomePage/>}/>
           <Route path="/" element={<MoviePage />} />
           <Route path="/login" element={<LoginForm />} />
           <Route

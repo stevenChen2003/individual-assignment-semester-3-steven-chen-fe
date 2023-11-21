@@ -1,5 +1,5 @@
 import React from 'react'
-import AdminMovieApi from '../../api/adminApi/AdminMovieApi';
+import MovieApi from '../../api/adminApi/MovieApi';
 import { useNavigate } from 'react-router-dom';
 
 export default function MovieItem(props) {
@@ -9,7 +9,7 @@ export default function MovieItem(props) {
     const handleDeleteMovie = () => {
         const movieId = parseInt(movie.movieId, 10);
 
-        AdminMovieApi.deleteMovie(movieId)
+        MovieApi.deleteMovie(movieId)
         .then(response => {refreshMovieList()})
     }
 

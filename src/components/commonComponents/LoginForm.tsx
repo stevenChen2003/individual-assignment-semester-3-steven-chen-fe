@@ -26,7 +26,7 @@ export default function LoginForm() {
       AuthAPI.login(email, password)
       .then((response) => {
         console.log(response);
-        showToast("Login Successful", "success");
+        // showToast("Login Successful", "success");
         setTimeout(() => {
           navigate('/');
         }, 2000)
