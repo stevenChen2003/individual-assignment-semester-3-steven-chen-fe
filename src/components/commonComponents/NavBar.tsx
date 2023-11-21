@@ -28,7 +28,7 @@ export default function NavBar() {
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/">
-                Movie List
+                Home
               </Link>
             </li>
             {isLoggedIn ? (

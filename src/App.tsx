@@ -15,13 +15,20 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
-          <Route path="/homePage" element={<HomePage/>}/>
-          <Route path="/" element={<MoviePage />} />
+          <Route path="/" element={<HomePage/>}/>
           <Route path="/login" element={<LoginForm />} />
+          <Route 
+            path="/moviePage" 
+            element={
+              <PrivateRoute roles={['Admin']}>
+                <MoviePage />
+              </PrivateRoute>
+            } 
+          />
           <Route
             path="/addMovie"
             element={
-              <PrivateRoute roles={['Admin', 'Customer']}>
+              <PrivateRoute roles={['Admin']}>
                 <AddMoviePage />
               </PrivateRoute>
             }
