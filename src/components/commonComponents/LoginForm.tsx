@@ -26,10 +26,11 @@ export default function LoginForm() {
       AuthAPI.login(email, password)
       .then((response) => {
         console.log(response);
+        navigate('/');
         // showToast("Login Successful", "success");
-        setTimeout(() => {
-          navigate('/');
-        }, 2000)
+        // setTimeout(() => {
+        //   navigate('/');
+        // }, 2000)
         
       })
       .catch(() => showToast("Login failed!", "error"))
