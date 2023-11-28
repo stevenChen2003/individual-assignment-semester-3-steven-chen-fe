@@ -7,6 +7,7 @@ import EditMoviePage from "./pages/adminPages/EditMoviePage";
 import LoginForm from "./components/commonComponents/LoginForm";
 import PrivateRoute from "./pages/PrivateRoute";
 import HomePage from "./pages/HomePage";
+import SignUp from "./components/commonComponents/SignUp";
 
 function App() {
   
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/signUp" element={<SignUp />} />
           <Route 
             path="/moviePage" 
             element={
