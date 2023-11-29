@@ -1,55 +1,82 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Button, Card, Col, Container, Row, Modal } from 'react-bootstrap';
+
 import UserApi from '../api/UserApi';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import EditUserForm from '../components/EditUserForm';
 
 export default function PersonalPage() {
-
   const { id } = useParams();
   const [user, setUser] = useState({
+    id: '',
     email: '',
     firstName: '',
     lastName: '',
     dateOfBirth: '',
+    password: '',
+    role: '',
   });
+  const [showEditModal, setShowEditModal] = useState(false);
 
-  useEffect(() => {
-    const getUserInformation = async () => {
+  const getUserInformation = async () => {
       try {
         const data = await UserApi.getUser(id);
         console.log(data);
         setUser({
+          id: data.userId,
           email: data.email,
           firstName: data.firstName,
           lastName: data.lastName,
           dateOfBirth: data.dateOfBirth,
+          password: data.password,
+          role: data.role,
         });
       } catch (error) {
         console.error('Error fetching user details:', error);
-        ///go to unauthorized page or something
       }
-      
     };
+
+  useEffect(() => {
     getUserInformation();
   }, [id]);
 
+  const handleEditClick = () => {
+    setShowEditModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowEditModal(false);
+  };
 
   return (
     <Container className="mt-5">
-     <Row className="justify-content-md-center">
-       <Col xs lg="6">
-         <Card>
-           <Card.Body>
-             <Card.Title>{user.firstName} {user.lastName}</Card.Title>
-             <Card.Text>
-               Email: {user.email} <br />
-               Date of Birth: {user.dateOfBirth}
-             </Card.Text>
-             <Button variant="primary">Edit Profile</Button>
-           </Card.Body>
-         </Card>
-       </Col>
-     </Row>
-   </Container>
-  )
+      <Row className="justify-content-md-center">
+        <Col xs lg="6">
+          <Card>
+            <Card.Body>
+              <Card.Title>{user.firstName} {user.lastName}</Card.Title>
+              <Card.Text>
+                Email: {user.email} <br />
+                Date of Birth: {user.dateOfBirth}
+              </Card.Text>
+              <Button variant="primary" onClick={handleEditClick}>
+                Edit Profile
+              </Button>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+
+      {/* Edit User Modal */}
+      <Modal show={showEditModal} onHide={handleModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit User Profile</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <EditUserForm user={user} onClose={handleModalClose} getUserInformation={getUserInformation} />
+        </Modal.Body>
+      </Modal>
+    </Container>
+  );
 }
+
