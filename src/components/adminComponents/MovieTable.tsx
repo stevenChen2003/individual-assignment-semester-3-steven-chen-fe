@@ -24,7 +24,7 @@ export default function MovieTable(props) {
         <tbody>
           {movieItems.map((movie) => 
           (
-            <MovieItem key={movie.id} movie={movie} refreshMovieList={refreshMovieList}/>
+            <MovieItem key={movie.movieId} movie={movie} refreshMovieList={refreshMovieList}/>
           ))}
         </tbody>
       </table>
