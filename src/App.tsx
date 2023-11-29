@@ -8,6 +8,7 @@ import PrivateRoute from "./pages/PrivateRoute";
 import HomePage from "./pages/HomePage";
 import SignUp from "./components/commonComponents/SignUp";
 import MovieDetailPage from "./pages/MovieDetailPage";
+import PersonalPage from "./pages/PersonalPage";
 
 function App() {
   
@@ -20,6 +21,14 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/movie/:id" element={<MovieDetailPage/>}/>
+          <Route 
+            path="/user/:id" 
+            element={
+              <PrivateRoute roles={['Admin', 'Customer']}>
+                <PersonalPage />
+              </PrivateRoute>
+            } 
+          />
           <Route 
             path="/moviePage" 
             element={

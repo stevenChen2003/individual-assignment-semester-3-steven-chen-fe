@@ -6,6 +6,7 @@ import TokenManager from '../../api/TokenManager';
 
 export default function NavBar() {
   const navigate = useNavigate();
+  const claims = TokenManager.getClaims();
   const isLoggedIn = TokenManager.getAccessToken() !== null;
 
   //Button
@@ -46,11 +47,19 @@ export default function NavBar() {
               </Link>
             </li>
             {isLoggedIn ? (
-              <li className="nav-item">
-                <button className="nav-link btn btn-link" onClick={handleLogout}>
-                  Logout
-                </button>
-              </li>
+              <>
+                <li className="nav-item">
+                  <button className="nav-link btn btn-link" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={`/user/${claims.userId}`}>
+                    Personal
+                  </Link>
+                </li>
+              </>
+              
             ) : (
               <li className="nav-item">
                 <Link className="nav-link" to="/login">
