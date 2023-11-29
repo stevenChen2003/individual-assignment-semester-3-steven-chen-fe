@@ -18,7 +18,7 @@ const UserApi = {
 
     addUser: (newUser) => axios.post(`/users`, newUser),
 
-    updateUser: (updateUser) => axios.put(`/users/${updateUser.id}`,
+    updateUser: (updateUser) => axios.put(`/users/${updateUser.id}`, updateUser,
     {
         headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
     }),
