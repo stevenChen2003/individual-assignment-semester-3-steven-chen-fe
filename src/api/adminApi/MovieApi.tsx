@@ -8,19 +8,19 @@ const MovieApi = {
     getMovies: () => axios.get(`/movies`)
     .then(response => response.data.movies),
 
-    getMovie: (movieId) => axios.get(`/movies/${movieId}`).then((response) => response.data),
+    getMovie: (movieId: any) => axios.get(`/movies/${movieId}`).then((response) => response.data),
 
-    postMovie: (newMovie) => axios.post("/movies", newMovie,
+    postMovie: (newMovie: any) => axios.post("/movies", newMovie,
     {
         headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
     }),
 
-    updateMovie: (updateMovie) => axios.put(`/movies/${updateMovie.id}`, updateMovie, 
+    updateMovie: (updateMovie: { id: any; }) => axios.put(`/movies/${updateMovie.id}`, updateMovie, 
     {
         headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
     }),
 
-    deleteMovie: (movieId) => axios.delete(`/movies/${movieId}`,
+    deleteMovie: (movieId: any) => axios.delete(`/movies/${movieId}`,
     {
         headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
     })
