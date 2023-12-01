@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Login.css';
 import AuthAPI from '../../api/AuthApi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TokenManager from '../../api/TokenManager';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -92,6 +92,9 @@ export default function LoginForm() {
                     <button type="submit" className="btn btn-primary btn-block mb-5">
                       Sign In
                     </button>
+                    <p className="mb-0">
+                      Don't have an account? <Link to="/signup">Sign Up</Link>
+                    </p>
                   </div>
                 </form>
               </div>
