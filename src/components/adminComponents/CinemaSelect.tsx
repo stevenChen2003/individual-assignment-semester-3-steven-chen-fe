@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 
-const CinemaSelect = ({ cinemas, onSelect }) => {
+const CinemaSelect = ({ cinemas, onSelect, selectedCinema }) => {
   const options = cinemas.map((cinema) => ({
     value: cinema.cinemaId,
     label: cinema.name,
   }));
 
-  const [selectedOption, setSelectedOption] = useState(null);
-
   const handleSelect = (selectedOption) => {
-    setSelectedOption(selectedOption);
     if (selectedOption) {
       onSelect(selectedOption.value);
     } else {
@@ -21,7 +18,7 @@ const CinemaSelect = ({ cinemas, onSelect }) => {
   return (
     <div>
       <Select
-        value={selectedOption}
+        value={{ label: selectedCinema.name, value: selectedCinema.cinemaId }}
         isClearable={true}
         onChange={handleSelect}
         options={options}

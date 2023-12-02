@@ -8,20 +8,16 @@ import CinemaEditForm from '../../components/adminComponents/CinemaEditForm';
 
 const CinemaPage = () => {
  const [cinemas, setCinemas] = useState([]);
- const [selectedCinema, setSelectedCinema] = useState(null);
  const [cinema, setCinema] = useState({
   cinemaId: '',
   name: '',
   location: '',
-  numHalls: ''
+  amountOfHalls: ''
  });
  const [show, setShow] = useState(false);
  const [showEdit, setShowEdit] = useState(false);
 
  const handleSelect = (selectedCinemaId) => {
-  console.log(selectedCinemaId);
-  setSelectedCinema(selectedCinemaId);
-
   if (selectedCinemaId) {
     CinemaApi.getCinema(selectedCinemaId)
       .then((response) => {
@@ -30,7 +26,7 @@ const CinemaPage = () => {
           cinemaId: response.cinemaId,
           name: response.name,
           location: response.location,
-          numHalls: response.amountOfHalls
+          amountOfHalls: response.amountOfHalls
         });
       })
       .catch((error) => {
@@ -41,7 +37,7 @@ const CinemaPage = () => {
       cinemaId: '',
       name: '',
       location: '',
-      numHalls: ''
+      amountOfHalls: ''
     });
   }
  };
@@ -59,9 +55,22 @@ const CinemaPage = () => {
  }
 
  const handleDelete = () => {
-  console.log(selectedCinema);
-  CinemaApi.deleteCinema(cinema.cinemaId);
- };
+  CinemaApi.deleteCinema(cinema.cinemaId)
+    .then(() => {
+      setCinema({
+        cinemaId: '',
+        name: '',
+        location: '',
+        amountOfHalls: ''
+
+      })
+      handleGetCinemas();
+    })
+    .catch((error) => {
+      console.error('Error deleting cinema:', error);
+    });
+};
+
 
  const handleClose = () => setShow(false);
  const handleShow = () => setShow(true);
@@ -74,21 +83,21 @@ const CinemaPage = () => {
 
  useEffect(() => {
   handleGetCinemas();
- }, [selectedCinema]);
+ }, [cinema]);
 
  return (
   <div className='container-fluid mt-4'>
     <div className='row'>
       <div className='col-md-5 d-flex'>
         <div className='col-md-9'>
-          <CinemaSelect cinemas={cinemas} onSelect={handleSelect} />
+          <CinemaSelect cinemas={cinemas} onSelect={handleSelect} selectedCinema={cinema} />
           <div className='mt-2'>
             <Button variant='primary' onClick={handleShow}>
               Add Cinema
             </Button>
           </div>
         </div>
-        {selectedCinema && (
+        {cinema.cinemaId && (
           <div className='col-md-3'>
             <CinemaButtons onEdit={handleShowEdit} onDelete={handleDelete} />
           </div>
