@@ -4,10 +4,20 @@ import CinemaApi from "../../api/CinemaApi";
 import { toast } from "react-toastify";
 
 const CinemaEditForm = ({ show, handleClose, onGetCinemas, selectCinema }) => {
-  const [cinema, setCinema] = useState(selectCinema);
+  const [cinema, setCinema] = useState({
+    cinemaId: '',
+    name: '',
+    location: '',
+    amountOfHalls: ''
+   });
 
   useEffect(() => {
-    setCinema(selectCinema);
+    setCinema({
+      cinemaId: selectCinema.cinemaId,
+      name: selectCinema.name,
+      location: selectCinema.location,
+      amountOfHalls: selectCinema.amountOfHalls
+    });
   }, [selectCinema]);
 
   const handleChange = (e) => {
@@ -16,6 +26,7 @@ const CinemaEditForm = ({ show, handleClose, onGetCinemas, selectCinema }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(cinema)
     CinemaApi.updateCinema(cinema)
       .then((response) => {
         onGetCinemas();
@@ -36,7 +47,6 @@ const CinemaEditForm = ({ show, handleClose, onGetCinemas, selectCinema }) => {
   };
 
   const handleModalClose = () => {
-    // Reset the form values to the original values when closing the modal
     setCinema(selectCinema);
     handleClose();
   };
@@ -73,8 +83,8 @@ const CinemaEditForm = ({ show, handleClose, onGetCinemas, selectCinema }) => {
             <Form.Control
               type="number"
               placeholder="Enter number of halls"
-              name="numHalls"
-              value={cinema.numHalls}
+              name="amountOfHalls"
+              value={cinema.amountOfHalls}
               onChange={handleChange}
             />
           </Form.Group>
