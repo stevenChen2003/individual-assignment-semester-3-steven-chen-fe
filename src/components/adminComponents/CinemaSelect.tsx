@@ -3,7 +3,7 @@ import Select from 'react-select';
 
 const CinemaSelect = ({ cinemas, onSelect }) => {
   const options = cinemas.map((cinema) => ({
-    value: cinema.cinemaId, // Assuming cinemaId is the property representing the ID
+    value: cinema.cinemaId,
     label: cinema.name,
   }));
 
@@ -11,8 +11,6 @@ const CinemaSelect = ({ cinemas, onSelect }) => {
 
   const handleSelect = (selectedOption) => {
     setSelectedOption(selectedOption);
-
-    // Use selectedOption directly instead of selectedCinema from the state
     if (selectedOption) {
       onSelect(selectedOption.value);
     } else {
@@ -27,7 +25,7 @@ const CinemaSelect = ({ cinemas, onSelect }) => {
         isClearable={true}
         onChange={handleSelect}
         options={options}
-        getOptionValue={(option) => option.value} // Ensure the correct property is used
+        getOptionValue={(option) => option.value}
       />
     </div>
   );

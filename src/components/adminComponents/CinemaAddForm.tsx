@@ -3,7 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import CinemaApi from '../../api/CinemaApi';
 import { toast } from 'react-toastify';
 
-const CinemaForm = ({ show, handleClose, onGetCinemas }) => {
+const CinemaAddForm = ({ show, handleClose, onGetCinemas }) => {
  const [cinema, setCinema] = useState({
   name: '',
   location: '',
@@ -63,6 +63,6 @@ const CinemaForm = ({ show, handleClose, onGetCinemas }) => {
  );
 };
 
-export default CinemaForm;
+export default CinemaAddForm;
 
 

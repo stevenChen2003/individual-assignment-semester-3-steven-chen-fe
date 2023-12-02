@@ -22,7 +22,13 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/movie/:id" element={<MovieDetailPage/>}/>
-          <Route path="/admin/cinema" element={<CinemasPage/>}/>
+          <Route path="/admin/cinema" 
+            element={
+              <PrivateRoute roles={['Admin']}>
+                <CinemasPage/>
+              </PrivateRoute>
+            }
+          />
           <Route 
             path="/user/:id" 
             element={

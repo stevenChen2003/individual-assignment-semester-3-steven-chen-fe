@@ -3,7 +3,8 @@ import CinemaSelect from '../../components/adminComponents/CinemaSelect';
 import CinemaApi from '../../api/CinemaApi';
 import CinemaButtons from '../../components/adminComponents/CinemaButtons';
 import { Button } from 'react-bootstrap';
-import CinemaForm from '../../components/adminComponents/CinemaForm';
+import CinemaAddForm from '../../components/adminComponents/CinemaAddForm';
+import CinemaEditForm from '../../components/adminComponents/CinemaEditForm';
 
 const CinemaPage = () => {
  const [cinemas, setCinemas] = useState([]);
@@ -15,6 +16,7 @@ const CinemaPage = () => {
   numHalls: ''
  });
  const [show, setShow] = useState(false);
+ const [showEdit, setShowEdit] = useState(false);
 
  const handleSelect = (selectedCinemaId) => {
   console.log(selectedCinemaId);
@@ -56,10 +58,6 @@ const CinemaPage = () => {
 
  }
 
- const handleEdit = (cinema) => {
-  // Add your edit logic here
- };
-
  const handleDelete = () => {
   console.log(selectedCinema);
   CinemaApi.deleteCinema(cinema.cinemaId);
@@ -68,14 +66,18 @@ const CinemaPage = () => {
  const handleClose = () => setShow(false);
  const handleShow = () => setShow(true);
 
+ const handleShowEdit = () => setShowEdit(true);
+ const handleCloseEdit = () => setShowEdit(false);
+
+
  
 
  useEffect(() => {
   handleGetCinemas();
- }, []);
+ }, [selectedCinema]);
 
  return (
-  <div className='container-fluid m-4'>
+  <div className='container-fluid mt-4'>
     <div className='row'>
       <div className='col-md-5 d-flex'>
         <div className='col-md-9'>
@@ -88,7 +90,7 @@ const CinemaPage = () => {
         </div>
         {selectedCinema && (
           <div className='col-md-3'>
-            <CinemaButtons onEdit={handleEdit} onDelete={handleDelete} />
+            <CinemaButtons onEdit={handleShowEdit} onDelete={handleDelete} />
           </div>
         )}
         <div>
@@ -102,7 +104,8 @@ const CinemaPage = () => {
         )}
       </div>
     </div>
-    <CinemaForm show={show} handleClose={handleClose} onGetCinemas={handleGetCinemas}/>
+    <CinemaAddForm show={show} handleClose={handleClose} onGetCinemas={handleGetCinemas}/>
+    <CinemaEditForm show={showEdit} handleClose={handleCloseEdit} onGetCinemas={handleGetCinemas} selectCinema={cinema}/>
   </div>
  );
 };
