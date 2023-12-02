@@ -15,7 +15,7 @@ const CinemaApi = {
         headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
     }),
 
-    updateCinema: (updateCinema: { id: any; }) => axios.put(`/cinemas/${updateCinema.id}`, updateCinema, 
+    updateCinema: (updateCinema: { cinemaId: any; }) => axios.put(`/cinemas/${updateCinema.cinemaId}`, updateCinema, 
     {
         headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
     }),
