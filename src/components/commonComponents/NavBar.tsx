@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import logo from '../../assets/images/logo.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, useNavigate } from 'react-router-dom';
-import TokenManager from '../../api/TokenManager';
+import React, { useState } from "react";
+import logo from "../../assets/images/logo.png";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Link, useNavigate } from "react-router-dom";
+import TokenManager from "../../api/TokenManager";
 
 export default function NavBar() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function NavBar() {
 
   const handleLogout = () => {
     TokenManager.clear();
-    navigate('/');
+    navigate("/");
   };
 
   const toggleNavbar = () => {
@@ -39,7 +39,10 @@ export default function NavBar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className={`collapse navbar-collapse${isExpanded ? ' show' : ''}`} id="navbarNav">
+        <div
+          className={`collapse navbar-collapse${isExpanded ? " show" : ""}`}
+          id="navbarNav"
+        >
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/">
@@ -49,17 +52,37 @@ export default function NavBar() {
             {isLoggedIn ? (
               <>
                 <li className="nav-item">
-                  <button className="nav-link btn btn-link" onClick={handleLogout}>
-                    Logout
-                  </button>
-                </li>
-                <li className="nav-item">
                   <Link className="nav-link" to={`/user/${claims.userId}`}>
                     Personal
                   </Link>
                 </li>
+                {claims?.roles?.includes("Admin") && (
+                  <>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/admin/cinema">
+                        Cinema
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/moviePage">
+                        Movie
+                      </Link>
+                    </li>
+                  </>
+                )}
+
+                {/* {claims?.roles?.includes('Customer') && (
+                )} */}
+
+                <li className="nav-item">
+                  <button
+                    className="nav-link btn btn-link"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
               </>
-              
             ) : (
               <li className="nav-item">
                 <Link className="nav-link" to="/login">
