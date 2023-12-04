@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
 import MovieTable from "../../components/adminComponents/MovieTable";
 import MovieApi from "../../api/adminApi/MovieApi";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import AddMovieForm from "../../components/adminComponents/AddMovieForm";
 
 
 function MoviePage() {
     const [movieItems, setMovieItems] = useState([]);
-
-    const navigate = useNavigate();
-    const navigateToAddMoviePage = () => {
-        navigate('/addMovie');
-      };
-
+    
     //Refresh table
     useEffect(() => {
         refreshMovieList();
