@@ -77,7 +77,7 @@ const CinemaAddForm = ({ show, handleClose, onGetCinemas }) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Button className="mt-2" variant="primary" type="submit">
+          <Button className="mt-3" variant="primary" type="submit">
             Add Cinema
           </Button>
         </Form>

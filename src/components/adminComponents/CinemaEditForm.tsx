@@ -88,7 +88,7 @@ const CinemaEditForm = ({ show, handleClose, onGetCinemas, selectCinema }) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className="mt-3" variant="primary" type="submit">
             Save Changes
           </Button>
         </Form>
