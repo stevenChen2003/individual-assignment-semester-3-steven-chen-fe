@@ -128,7 +128,7 @@ const CinemaPage = () => {
                     as={Link}
                     to={`/admin/hall/${cinema.cinemaId}`}
                     className="m-2"
-                    variant="secondary"
+                    variant="primary"
                     style={{ width: "120px", height: "120px" }}
                   >
                     + Add Hall
