@@ -10,14 +10,24 @@ const AddMovieForm = ({ onAddMovie }) => {
     rating: 0,
     releaseDate: '',
     durationInMin: 0,
-    // imageFile: null, 
   });
+
+  const [file, setFile] = useState(null);
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formData = new FormData();
 
-    onAddMovie(movie);
+    formData.append(
+        "request",
+        new Blob([JSON.stringify(movie)], { type: "application/json" }),
+    );
+
+    if (file) {
+      formData.append("file", file)
+    }
+    onAddMovie(formData);
     // Clear the form fields
     setMovie({
       id: 0,
@@ -27,8 +37,8 @@ const AddMovieForm = ({ onAddMovie }) => {
       rating: 0,
       releaseDate: '',
       durationInMin: 0,
-      // imageFile: null, 
     })
+    setFile(null);
   };
 
   return (
@@ -98,7 +108,7 @@ const AddMovieForm = ({ onAddMovie }) => {
           required
         />
       </div>
-      {/* <div className="mb-3">
+      <div className="mb-3">
         <label htmlFor="imageFile" className="form-label">
           Upload Image
         </label>
@@ -106,11 +116,11 @@ const AddMovieForm = ({ onAddMovie }) => {
           type="file"
           id="imageFile"
           className="form-control"
-          onChange={(e) => setMovie({ ...movie, imageFile: e.target.files[0] })}
+          onChange={(e) => setFile(e.target.files[0])}
           accept="image/*" // Accept only image files
           required
         />
-      </div> */}
+      </div>
       <button type="submit" className="btn btn-primary">
         Add Movie
       </button>

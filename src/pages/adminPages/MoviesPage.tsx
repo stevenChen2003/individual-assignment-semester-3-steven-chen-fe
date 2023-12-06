@@ -19,24 +19,24 @@ function MoviePage() {
         .catch(error => console.log(error));
     }
 
-    const handleAddMovie = (newMovie) => {
-    
-        MovieApi.postMovie(newMovie)
-        .then(response => {
-          console.log("Movie added successfully:", response);
-          toast.success('Movie added successfully');
-          refreshMovieList();
-        })
-        .catch(error => {
-          if (error.response.status === 400) {
-            console.log("Movie already exists error:", error.response.data);
-            toast.error("Movie already exists");
-          } else {
-            toast.error("Sorry, something went wrong");
-          }
-        });
-        
-      }
+    const handleAddMovie = (formData) => {
+   
+      MovieApi.postMovie(formData)
+      .then(response => {
+        console.log("Movie added successfully:", response);
+        toast.success('Movie added successfully');
+        refreshMovieList();
+      })
+      .catch(error => {
+        if (error.response.status === 400) {
+          console.log("Movie already exists error:", error.response.data);
+          toast.error("Movie already exists");
+        } else {
+          toast.error("Sorry, something went wrong");
+        }
+      });
+      
+    }
 
 
 

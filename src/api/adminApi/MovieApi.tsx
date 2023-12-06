@@ -12,7 +12,10 @@ const MovieApi = {
 
     postMovie: (newMovie: any) => axios.post("/movies", newMovie,
     {
-        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${TokenManager.getAccessToken()}` 
+        }
     }),
 
     updateMovie: (updateMovie: { id: any; }) => axios.put(`/movies/${updateMovie.id}`, updateMovie, 
