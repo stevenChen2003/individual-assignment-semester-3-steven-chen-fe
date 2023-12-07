@@ -85,7 +85,7 @@ const CinemaPage = () => {
 
   useEffect(() => {
     handleGetCinemas();
-  }, [cinema]);
+  }, [cinema, halls]);
 
   return (
     <div className="container mt-4">
@@ -126,7 +126,7 @@ const CinemaPage = () => {
               <div className="border border-dark h-50 overflow-auto">
                 <div className="m-3">
                   {halls.map((hall) => (
-                    <HallCard hall={hall} key={hall.hallId}/>
+                    <HallCard hall={hall} setHalls={setHalls} key={hall.hallId}/>
                   ))}
                 </div>
               </div>
