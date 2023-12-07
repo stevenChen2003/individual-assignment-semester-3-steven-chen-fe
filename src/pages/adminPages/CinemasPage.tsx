@@ -7,6 +7,7 @@ import CinemaAddForm from "../../components/adminComponents/CinemaAddForm";
 import CinemaEditForm from "../../components/adminComponents/CinemaEditForm";
 import HallApi from "../../api/HallApi";
 import { Link } from "react-router-dom";
+import HallCard from "../../components/adminComponents/HallCard";
 
 const CinemaPage = () => {
   const [cinemas, setCinemas] = useState([]);
@@ -121,30 +122,22 @@ const CinemaPage = () => {
             <div className="vh-100">
               <h3>{cinema.name}</h3>
               <hr></hr>
-              <div className="border border-dark h-75">
-                {/*Need to make a hallItem component and maybe list*/}
+              
+              <div className="border border-dark h-50 overflow-auto">
                 <div className="m-2">
-                  <Button
-                    as={Link}
-                    to={`/admin/hall/${cinema.cinemaId}`}
-                    className="m-2"
-                    variant="primary"
-                    style={{ width: "120px", height: "120px" }}
-                  >
-                    + Add Hall
-                  </Button>
                   {halls.map((hall) => (
-                    <Button
-                      className="m-2"
-                      variant="secondary"
-                      style={{ width: "120px", height: "120px" }}
-                      key={hall.hallId}
-                    >
-                      Hall number: {hall.hallNumber}
-                    </Button>
+                    <HallCard hall={hall} key={hall.hallId}/>
                   ))}
                 </div>
               </div>
+              <Button
+                as={Link}
+                to={`/admin/hall/${cinema.cinemaId}`}
+                className="m-2"
+                variant="primary"
+              >
+                + Add Hall
+              </Button>
             </div>
           )}
         </div>

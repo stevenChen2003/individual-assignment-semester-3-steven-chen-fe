@@ -1,9 +1,20 @@
 import React from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 
-const HallForm = ({ seatPerRow, setSeatPerRow, numRows, setNumRows }) => {
+const HallForm = ({ hallNumber, setHallNumber, seatPerRow, setSeatPerRow, numRows, setNumRows }) => {
   return (
     <Form>
+      <Row className="mb-3">
+        <Col>
+          <Form.Label>Room Number:</Form.Label>
+          <Form.Control
+            type="number"
+            min="1"
+            value={hallNumber}
+            onChange={(e) => setHallNumber(parseInt(e.target.value, 10))}
+          />
+        </Col>
+      </Row>
       <Row className="mb-3">
         <Col>
           <Form.Label>Seats Per Row:</Form.Label>
