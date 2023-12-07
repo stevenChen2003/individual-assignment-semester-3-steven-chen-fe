@@ -39,6 +39,7 @@ const AddMovieForm = ({ onAddMovie }) => {
       durationInMin: 0,
     })
     setFile(null);
+    document.getElementById('imageFile').value = '';
   };
 
   return (
@@ -117,7 +118,7 @@ const AddMovieForm = ({ onAddMovie }) => {
           id="imageFile"
           className="form-control"
           onChange={(e) => setFile(e.target.files[0])}
-          accept="image/*" // Accept only image files
+          accept="image/*"
           required
         />
       </div>
