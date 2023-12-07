@@ -124,7 +124,7 @@ const CinemaPage = () => {
               <hr></hr>
               
               <div className="border border-dark h-50 overflow-auto">
-                <div className="m-2">
+                <div className="m-3">
                   {halls.map((hall) => (
                     <HallCard hall={hall} key={hall.hallId}/>
                   ))}
