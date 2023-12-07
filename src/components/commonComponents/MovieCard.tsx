@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import poster_test from '../../assets/images/poster_test.jpg';
 
-const MovieCard = ({ id, title, genre }) => {
+const MovieCard = ({ id, title, genre, imageURL }) => {
   const [isHovered, setHovered] = useState(false);
   const imageHeight = '280px';
 
@@ -25,7 +25,7 @@ const MovieCard = ({ id, title, genre }) => {
     >
       <Card.Img
         variant="top"
-        src={poster_test}
+        src={imageURL}
         alt={title}
         style={{ height: imageHeight, objectFit: 'cover' }}
       />

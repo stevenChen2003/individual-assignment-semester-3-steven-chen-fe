@@ -9,7 +9,8 @@ const MovieList = ({ movies }) => {
           key={movie.movieId}
           id={movie.movieId}
           title={movie.title}
-          genre={movie.genre}
+          genre={movie.genre} 
+          imageURL={movie.imageURL}        
         />
       ))}
     </div>

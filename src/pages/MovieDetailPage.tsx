@@ -12,6 +12,7 @@ const MovieDetailPage = () => {
     genre: '',
     releaseDate: '',
     durationInMin: 0,
+    imageURL: ''
   });
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const MovieDetailPage = () => {
           genre: data.genre,
           releaseDate: formattedDate,
           durationInMin: data.durationInMin,
+          imageURL: data.imageURL
         });
       } catch (error) {
         console.error('Error fetching movie details:', error);
@@ -48,7 +50,7 @@ const MovieDetailPage = () => {
           <Card style={{ width: '100%' }}>
             <Card.Img
               variant="top"
-              src={`https://via.placeholder.com/300x450`}
+              src={movie.imageURL}
               alt={movie.title}
             />
           </Card>
