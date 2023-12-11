@@ -63,7 +63,7 @@ export default function ShowtimeForm({ show, onHide }) {
   }));
 
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
         <Modal.Title>ShowtimeForm</Modal.Title>
       </Modal.Header>
@@ -95,11 +95,11 @@ export default function ShowtimeForm({ show, onHide }) {
           </Form.Group>
           <Form.Group controlId="startTime">
             <Form.Label>Start Time</Form.Label>
-            <Form.Control type="time" />
+            <Form.Control type="datetime-local" />
           </Form.Group>
           <Form.Group controlId="endTime">
             <Form.Label>End Time</Form.Label>
-            <Form.Control type="time" />
+            <Form.Control type="datetime-local" />
           </Form.Group>
           <Form.Group controlId="pricePerSeat">
             <Form.Label>Price Per Seat</Form.Label>
@@ -108,7 +108,13 @@ export default function ShowtimeForm({ show, onHide }) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            onHide();
+            setSelectedCinema(null);
+          }}
+        >
           Close
         </Button>
         <Button variant="primary" onClick={onHide}>
