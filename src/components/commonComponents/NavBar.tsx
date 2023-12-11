@@ -64,8 +64,13 @@ export default function NavBar() {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/moviePage">
+                      <Link className="nav-link" to="/admin/movie">
                         Movie
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/admin/showtime">
+                        Showtime
                       </Link>
                     </li>
                   </>

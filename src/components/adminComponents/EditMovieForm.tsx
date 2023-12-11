@@ -40,7 +40,7 @@ export default function EditMovieForm(props) {
 
       //Delay for 2 sec and then redirect
       setTimeout(() => {
-        navigate('/moviePage');
+        navigate('/admin/movie');
       }, 2000);
 
     })

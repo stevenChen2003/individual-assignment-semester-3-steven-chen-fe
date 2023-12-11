@@ -14,45 +14,59 @@ import HallPage from "./pages/HallPage";
 import ShowtimePage from "./pages/adminPages/ShowtimePage";
 
 function App() {
-  
   return (
     <>
       <Router>
         <NavBar />
         <Routes>
-          <Route path="/" element={<HomePage/>}/>
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signUp" element={<SignUp />} />
-          <Route path="/movie/:id" element={<MovieDetailPage/>}/>
-          <Route path="/admin/showtime" element={<ShowtimePage/>}/>
-          <Route path="/admin/hall" element={<HallPage/>}/>
-          <Route path="/admin/cinema" 
+          <Route path="/movie/:id" element={<MovieDetailPage />} />
+          <Route
+            path="/admin/showtime"
             element={
-              <PrivateRoute roles={['Admin']}>
-                <CinemasPage/>
+              <PrivateRoute roles={["Admin"]}>
+                <ShowtimePage />
               </PrivateRoute>
             }
           />
-          <Route 
-            path="/user/:id" 
+          <Route
+            path="/admin/hall"
             element={
-              <PrivateRoute roles={['Admin', 'Customer']}>
+              <PrivateRoute roles={["Admin"]}>
+                <HallPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/cinema"
+            element={
+              <PrivateRoute roles={["Admin"]}>
+                <CinemasPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/user/:id"
+            element={
+              <PrivateRoute roles={["Admin", "Customer"]}>
                 <PersonalPage />
               </PrivateRoute>
-            } 
+            }
           />
-          <Route 
-            path="/moviePage" 
+          <Route
+            path="/admin/movie"
             element={
-              <PrivateRoute roles={['Admin']}>
+              <PrivateRoute roles={["Admin"]}>
                 <MoviePage />
               </PrivateRoute>
-            } 
+            }
           />
           <Route
             path="/editMovie/:id"
             element={
-              <PrivateRoute roles={['Admin']}>
+              <PrivateRoute roles={["Admin"]}>
                 <EditMoviePage />
               </PrivateRoute>
             }
@@ -64,4 +78,3 @@ function App() {
 }
 
 export default App;
-
