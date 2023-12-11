@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import CinemaAddForm from "../../components/adminComponents/CinemaAddForm";
 import CinemaEditForm from "../../components/adminComponents/CinemaEditForm";
 import HallApi from "../../api/HallApi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import HallCard from "../../components/adminComponents/HallCard";
 
 const CinemaPage = () => {
@@ -20,6 +20,7 @@ const CinemaPage = () => {
   const [show, setShow] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [halls, setHalls] = useState([]);
+  const location = useLocation();
 
   const handleSelect = (selectedCinemaId) => {
     if (selectedCinemaId) {
@@ -82,6 +83,20 @@ const CinemaPage = () => {
 
   const handleShowEdit = () => setShowEdit(true);
   const handleCloseEdit = () => setShowEdit(false);
+
+  const setupCinemaPage = () => {
+    handleGetCinemas();
+
+    const selectedCinemaId = location.state?.selectedCinemaId;
+    console.log("State", location.state?.selectedCinemaId);
+    if (selectedCinemaId) {
+      handleSelect(selectedCinemaId);
+    }
+  };
+
+  useEffect(() => {
+    setupCinemaPage();
+  }, []);
 
   useEffect(() => {
     handleGetCinemas();

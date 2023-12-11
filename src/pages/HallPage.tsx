@@ -45,7 +45,7 @@ const HallPage = () => {
       };
       console.log("Test",newHall)
       await HallApi.addHall(newHall);
-      navigate(-1);
+      navigate(`/admin/cinema`, { state: { selectedCinemaId: cinemaId } });
       console.log("Hall added successfully!");
     } catch (error) {
       console.error("Error adding hall:", error);
