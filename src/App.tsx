@@ -11,6 +11,7 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 import PersonalPage from "./pages/PersonalPage";
 import CinemasPage from "./pages/adminPages/CinemasPage";
 import HallPage from "./pages/HallPage";
+import ShowtimePage from "./pages/adminPages/ShowtimePage";
 
 function App() {
   
@@ -23,7 +24,8 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/movie/:id" element={<MovieDetailPage/>}/>
-          <Route path="/admin/hall/:id" element={<HallPage/>}/>
+          <Route path="/admin/showtime" element={<ShowtimePage/>}/>
+          <Route path="/admin/hall" element={<HallPage/>}/>
           <Route path="/admin/cinema" 
             element={
               <PrivateRoute roles={['Admin']}>
