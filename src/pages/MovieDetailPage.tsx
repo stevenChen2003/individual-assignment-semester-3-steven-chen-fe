@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import MovieApi from '../api/adminApi/MovieApi';
+import MovieApi from '../api/MovieApi';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
 const MovieDetailPage = () => {

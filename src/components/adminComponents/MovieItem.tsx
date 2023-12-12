@@ -1,5 +1,5 @@
 import React from 'react'
-import MovieApi from '../../api/adminApi/MovieApi';
+import MovieApi from '../../api/MovieApi';
 import { useNavigate } from 'react-router-dom';
 
 export default function MovieItem(props) {

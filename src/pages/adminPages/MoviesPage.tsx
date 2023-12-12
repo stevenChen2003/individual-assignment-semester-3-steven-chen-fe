@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MovieTable from "../../components/adminComponents/MovieTable";
-import MovieApi from "../../api/adminApi/MovieApi";
+import MovieApi from "../../api/MovieApi";
 import { ToastContainer, toast } from "react-toastify";
 import AddMovieForm from "../../components/adminComponents/AddMovieForm";
 

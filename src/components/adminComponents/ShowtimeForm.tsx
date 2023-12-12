@@ -3,7 +3,7 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import Select from "react-select";
 import CinemaApi from "../../api/CinemaApi";
 import HallApi from "../../api/HallApi";
-import MovieApi from "../../api/adminApi/MovieApi";
+import MovieApi from "../../api/MovieApi";
 
 export default function ShowtimeForm({ show, onHide }) {
   const [cinemas, setCinemas] = useState([]);

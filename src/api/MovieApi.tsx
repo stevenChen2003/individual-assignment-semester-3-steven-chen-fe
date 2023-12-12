@@ -1,5 +1,5 @@
 import axios from "axios";
-import TokenManager from "../TokenManager";
+import TokenManager from "./TokenManager";
 
 axios.defaults.baseURL = "http://localhost:8080";
 
