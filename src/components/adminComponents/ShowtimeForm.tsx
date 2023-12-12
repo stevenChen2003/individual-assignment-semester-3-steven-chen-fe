@@ -139,7 +139,7 @@ export default function ShowtimeForm({ show, onHide }) {
           Close
         </Button>
         <Button variant="primary" onClick={onHide}>
-          Save Changes
+          Save
         </Button>
       </Modal.Footer>
     </Modal>
