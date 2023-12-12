@@ -60,6 +60,7 @@ export default function ShowtimeForm({ show, onHide }) {
   const movieOptions = movies.map((movie) => ({
     value: movie.movieId,
     label: movie.title,
+    image: movie.imageURL,
   }));
 
   return (
@@ -91,8 +92,28 @@ export default function ShowtimeForm({ show, onHide }) {
           </Row>
           <Form.Group controlId="movieSelect">
             <Form.Label>Select Movie</Form.Label>
-            <Select options={movieOptions} />
+            <Select
+            //change format in the future
+              options={movieOptions}
+              formatOptionLabel={(option) => (
+                <div>
+                  <img
+                    src={option.image}
+                    alt={option.label}
+                    style={{
+                      marginRight: "10px",
+                      width: "70px",
+                      height: "70px",
+                      objectFit: "cover",
+                      // borderRadius: "50%",
+                    }}
+                  />
+                  <span>{option.label}</span>
+                </div>
+              )}
+            />
           </Form.Group>
+
           <Form.Group controlId="startTime">
             <Form.Label>Start Time</Form.Label>
             <Form.Control type="datetime-local" />
