@@ -138,7 +138,7 @@ const CinemaPage = () => {
               <h3>{cinema.name}</h3>
               <hr></hr>
 
-              <div className="border border-dark h-50 overflow-auto">
+              <div className="border border-dark h-75 overflow-auto">
                 <div className="m-3">
                   {halls.map((hall) => (
                     <HallCard

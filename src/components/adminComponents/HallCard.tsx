@@ -1,9 +1,10 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, CardBody } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import HallApi from "../../api/HallApi";
 
 const HallCard = ({ hall, setHalls }) => {
+  
   const handleDelete = () => {
     console.log(hall);
     HallApi.deleteHall(hall.hallId)
@@ -16,7 +17,8 @@ const HallCard = ({ hall, setHalls }) => {
   return (
     <Card className="m-2">
       <Card.Body>
-        <Card.Title>{`Hall ${hall.hallNumber}`}</Card.Title>
+        <Card.Title>{`Hall number: ${hall.hallNumber}`}</Card.Title>
+        <Card.Text>{`Capacity: ${hall.seatingCapacity} seats`}</Card.Text>
         <Button
           as={Link}
           variant="primary"
