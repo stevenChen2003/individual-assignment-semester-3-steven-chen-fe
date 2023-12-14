@@ -64,7 +64,14 @@ export default function ShowtimeForm({ show, onHide }) {
   }));
 
   return (
-    <Modal show={show} onHide={onHide} centered>
+    <Modal
+      show={show}
+      onHide={() => {
+        onHide();
+        setSelectedCinema(null);
+      }}
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title>ShowtimeForm</Modal.Title>
       </Modal.Header>
@@ -73,19 +80,20 @@ export default function ShowtimeForm({ show, onHide }) {
           <Row>
             <Col>
               <Form.Group controlId="cinemaSelect">
-                <Form.Label>Select Cinema</Form.Label>
+                <Form.Label>Select Cinema:</Form.Label>
                 <Select
                   options={cinemaOptions}
                   onChange={handleCinemaChange}
                   value={selectedCinema}
+                  placeholder="Select a cinema"
                 />
               </Form.Group>
             </Col>
             {selectedCinema && (
               <Col>
                 <Form.Group controlId="hallSelect">
-                  <Form.Label>Select Hall</Form.Label>
-                  <Select options={hallOptions} />
+                  <Form.Label>Select Hall:</Form.Label>
+                  <Select options={hallOptions} placeholder="Select a hall" />
                 </Form.Group>
               </Col>
             )}
@@ -93,7 +101,7 @@ export default function ShowtimeForm({ show, onHide }) {
           <Form.Group controlId="movieSelect">
             <Form.Label>Select Movie</Form.Label>
             <Select
-            //change format in the future
+              //change format in the future
               options={movieOptions}
               formatOptionLabel={(option) => (
                 <div>
