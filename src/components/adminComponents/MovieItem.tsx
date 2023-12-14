@@ -22,8 +22,10 @@ export default function MovieItem(props) {
             <td>{movie.movieId}</td>
             <td>{movie.title}</td>
             <td>{movie.genre}</td>
-            <td>{movie.rating}</td>
-            <td className="d-flex">
+            <td>
+                <img src={movie.imageURL} alt={movie.title} style={{width: '200px', height: '250px', objectFit: 'cover'}}/>
+            </td>
+            <td>
                 <button className="btn btn-primary mx-2" onClick={handleNavigateEditMovie}>
                     Edit
                 </button>

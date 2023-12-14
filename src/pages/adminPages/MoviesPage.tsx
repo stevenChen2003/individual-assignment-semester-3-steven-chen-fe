@@ -42,7 +42,7 @@ function MoviePage() {
 
     return (
         <div className="container">
-            <div className="row">
+            <div className="row mt-4">
                 <div className="col-9">
                     <MovieTable movieItems={movieItems} refreshMovieList={refreshMovieList}/>
                 </div>
