@@ -4,6 +4,8 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import Select from "react-select";
 import CinemaApi from "../../api/CinemaApi";
 import HallApi from "../../api/HallApi";
+import ShowTable from "../../components/adminComponents/ShowTable";
+import ShowtimeApi from "../../api/ShowtimeApi";
 
 export default function ShowtimePage() {
   const [show, setShow] = useState(false);
@@ -20,11 +22,21 @@ export default function ShowtimePage() {
 
   const hallOptions = halls.map((hall) => ({
     value: hall.hallId,
-    label: hall.hallNumber,
+    label: `Hall number: ${hall.hallNumber}`,
   }));
 
   const handleCinemaChange = (selectedOption) => {
     setSelectedCinema(selectedOption);
+  };
+
+  const handleHallChange = (selectedOption) => {
+    setSelectedHall(selectedOption);
+    console.log(selectedHall);
+    ShowtimeApi.getShowtimeByHallId(selectedOption.value)
+    .then(response => {
+      console.log(response);
+      setShowtimes(response)
+    })
   };
 
   useEffect(() => {
@@ -70,18 +82,23 @@ export default function ShowtimePage() {
               value={selectedCinema}
               placeholder="Select a Cinema"
             />
-            {selectedCinema && <Select options={hallOptions} />}
-            <Button className="mt-3" variant="success" onClick={handleShow}>
-              Add show
+            {selectedCinema && <Select options={hallOptions} onChange={handleHallChange} value={selectedHall} placeholder="Select a Hall"/>}
+          </div>
+          <div className="col-8">
+            <Button variant="success" onClick={handleShow}>
+              + Add show
             </Button>
           </div>
-
-
-          <div className="col-8">
-            <h2 className="text-center">Showtimes</h2>
-          </div>
-
         </div>
+        <hr></hr>
+
+        <div className="container mt-3">
+          <h2>Showtimes</h2>
+          <div>
+            <ShowTable showtimes={showtimes}/>
+          </div>
+        </div>
+
         <ShowtimeForm show={show} onHide={handleClose} />
       </div>
     </div>

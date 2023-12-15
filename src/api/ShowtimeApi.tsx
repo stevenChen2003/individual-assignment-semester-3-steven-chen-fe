@@ -9,6 +9,9 @@ const ShowtimeApi = {
         headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
     }),
 
+    getShowtimeByHallId: (hallId: any) => axios.get(`/showtime?hallId=${hallId}`)
+    .then(response => response.data)
+
 }
 
 export default ShowtimeApi;
