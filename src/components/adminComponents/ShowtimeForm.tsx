@@ -54,8 +54,11 @@ export default function ShowtimeForm({ show, onHide }) {
 
   const hallOptions = halls.map((hall) => ({
     value: hall.hallId,
-    label: hall.hallNumber,
+    label: `Hall number: ${hall.hallNumber}`,
   }));
+
+  //Sorting by Number
+  hallOptions.sort((a, b) => a.label.split(': ')[1].localeCompare(b.label.split(': ')[1]));
 
   const movieOptions = movies.map((movie) => ({
     value: movie.movieId,
@@ -93,7 +96,7 @@ export default function ShowtimeForm({ show, onHide }) {
               <Col>
                 <Form.Group controlId="hallSelect">
                   <Form.Label>Select Hall:</Form.Label>
-                  <Select options={hallOptions} placeholder="Select a hall" />
+                  <Select options={hallOptions} placeholder="Select a Hall" />
                 </Form.Group>
               </Col>
             )}
@@ -101,8 +104,8 @@ export default function ShowtimeForm({ show, onHide }) {
           <Form.Group controlId="movieSelect">
             <Form.Label>Select Movie</Form.Label>
             <Select
-              //change format in the future
               options={movieOptions}
+              placeholder="Select a Movie"
               formatOptionLabel={(option) => (
                 <div>
                   <img

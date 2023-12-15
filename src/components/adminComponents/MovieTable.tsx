@@ -15,7 +15,7 @@ export default function MovieTable(props) {
   return (
     <div style={containerStyle}>
       <Table striped bordered hover>
-        <thead className='sticky-top'>
+        <thead className='sticky-top bg-white'>
           <th>Movie ID</th>
           <th>Title</th>
           <th>Genre</th>
