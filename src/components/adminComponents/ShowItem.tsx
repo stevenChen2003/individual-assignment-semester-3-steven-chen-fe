@@ -5,6 +5,7 @@ export default function ShowItem({show}) {
   return (
     <tr>
         <td>{show.showtimeId}</td>
+        <td>{show.movie.title}</td>
     </tr>
   )
 }

@@ -7,6 +7,8 @@ export default function ShowTable({showtimes}) {
     maxHeight: "750px",
     overflowY: "auto",
   };
+
+  console.log(showtimes)
   return (
     <div style={containerStyle}>
       <Table striped bordered hover>
@@ -18,9 +20,15 @@ export default function ShowTable({showtimes}) {
           <th>Price per seat</th>
         </thead>
         <tbody>
-          {showtimes.map((show) => (
-            <ShowItem key={show.showtimeId} show={show}/>
-          ))}
+          {showtimes.showtimeList && showtimes.showtimeList.length > 0 ? (
+            showtimes.showtimeList.map((show) => (
+              <ShowItem key={show.showtimeId} show={show} />
+            ))
+          ) : (
+            <tr>
+              <td colSpan="5">No showtimes available.</td>
+            </tr>
+          )}
         </tbody>
       </Table>
     </div>
