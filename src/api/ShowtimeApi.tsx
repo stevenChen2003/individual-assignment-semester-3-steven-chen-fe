@@ -15,7 +15,7 @@ const ShowtimeApi = {
     getShowtime: (showtimeId: any) => axios.get(`/showtime/${showtimeId}`)
     .then(response => response.data),
 
-    getSeats: (showtimeId: any) => axios.get(`/showtime/seats/${showtimeId}`)
+    getSeats: (showtimeId: any) => axios.get(`/showtime/seats?showtimeId=${showtimeId}`)
     .then(response => response.data)
 
 }
