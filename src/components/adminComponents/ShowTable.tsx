@@ -18,6 +18,7 @@ export default function ShowTable({showtimes}) {
           <th>Start time</th>
           <th>End time</th>
           <th>Price per seat</th>
+          <th>Action</th>
         </thead>
         <tbody>
           {showtimes.showtimeList && showtimes.showtimeList.length > 0 ? (
@@ -26,7 +27,7 @@ export default function ShowTable({showtimes}) {
             ))
           ) : (
             <tr>
-              <td colSpan="5">No showtimes available.</td>
+              <td colSpan="6">No showtimes available.</td>
             </tr>
           )}
         </tbody>

@@ -10,6 +10,12 @@ const ShowtimeApi = {
     }),
 
     getShowtimeByHallId: (hallId: any) => axios.get(`/showtime?hallId=${hallId}`)
+    .then(response => response.data),
+
+    getShowtime: (showtimeId: any) => axios.get(`/showtime/${showtimeId}`)
+    .then(response => response.data),
+
+    getSeats: (showtimeId: any) => axios.get(`/showtime/seats/${showtimeId}`)
     .then(response => response.data)
 
 }
