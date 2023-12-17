@@ -4,12 +4,21 @@ import Select from "react-select";
 import CinemaApi from "../../api/CinemaApi";
 import HallApi from "../../api/HallApi";
 import MovieApi from "../../api/MovieApi";
+import ShowtimeApi from "../../api/ShowtimeApi";
 
 export default function ShowtimeForm({ show, onHide }) {
   const [cinemas, setCinemas] = useState([]);
   const [halls, setHalls] = useState([]);
   const [movies, setMovies] = useState([]);
   const [selectedCinema, setSelectedCinema] = useState(null);
+
+  const [showtime, setShowtime] = useState({
+    hallId: 0,
+    movieId: 0,
+    startTime: "",
+    endTime: "",
+    pricePerSeat: 0,
+  });
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -43,10 +52,6 @@ export default function ShowtimeForm({ show, onHide }) {
     fetchHalls();
   }, [selectedCinema]);
 
-  const handleCinemaChange = (selectedOption) => {
-    setSelectedCinema(selectedOption);
-  };
-
   const cinemaOptions = cinemas.map((cinema) => ({
     value: cinema.cinemaId,
     label: cinema.name,
@@ -58,13 +63,44 @@ export default function ShowtimeForm({ show, onHide }) {
   }));
 
   //Sorting by Number
-  hallOptions.sort((a, b) => a.label.split(': ')[1].localeCompare(b.label.split(': ')[1]));
+  hallOptions.sort((a, b) =>
+    a.label.split(": ")[1].localeCompare(b.label.split(": ")[1])
+  );
 
   const movieOptions = movies.map((movie) => ({
     value: movie.movieId,
     label: movie.title,
     image: movie.imageURL,
   }));
+
+  const handleCinemaChange = (selectedOption) => {
+    setSelectedCinema(selectedOption);
+  };
+
+  const handleChange = (e) => {
+    setShowtime({ ...showtime, [e.target.name]: e.target.value });
+  };
+
+  const handleAddShow = () => {
+    // Make the API call here
+    ShowtimeApi.addShowtime(showtime)
+      .then((response) => {
+        console.log(response);
+        // Reset the showtime state
+        setShowtime({
+          hallId: 0,
+          movieId: 0,
+          startTime: "",
+          endTime: "",
+          pricePerSeat: 0,
+        });
+        setSelectedCinema(null);
+        onHide();
+      })
+      .catch((error) => {
+        console.error("Error creating show:", error);
+      });
+  };
 
   return (
     <Modal
@@ -96,7 +132,13 @@ export default function ShowtimeForm({ show, onHide }) {
               <Col>
                 <Form.Group controlId="hallSelect">
                   <Form.Label>Select Hall:</Form.Label>
-                  <Select options={hallOptions} placeholder="Select a Hall" />
+                  <Select
+                    options={hallOptions}
+                    onChange={(selectedOption) =>
+                      setShowtime({ ...showtime, hallId: selectedOption.value })
+                    }
+                    placeholder="Select a Hall"
+                  />
                 </Form.Group>
               </Col>
             )}
@@ -105,6 +147,9 @@ export default function ShowtimeForm({ show, onHide }) {
             <Form.Label>Select Movie</Form.Label>
             <Select
               options={movieOptions}
+              onChange={(selectedOption) =>
+                setShowtime({ ...showtime, movieId: selectedOption.value })
+              }
               placeholder="Select a Movie"
               formatOptionLabel={(option) => (
                 <div>
@@ -116,7 +161,6 @@ export default function ShowtimeForm({ show, onHide }) {
                       width: "70px",
                       height: "70px",
                       objectFit: "cover",
-                      // borderRadius: "50%",
                     }}
                   />
                   <span>{option.label}</span>
@@ -127,15 +171,28 @@ export default function ShowtimeForm({ show, onHide }) {
 
           <Form.Group controlId="startTime">
             <Form.Label>Start Time</Form.Label>
-            <Form.Control type="datetime-local" />
+            <Form.Control
+              type="datetime-local"
+              name="startTime"
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group controlId="endTime">
             <Form.Label>End Time</Form.Label>
-            <Form.Control type="datetime-local" />
+            <Form.Control
+              type="datetime-local"
+              name="endTime"
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group controlId="pricePerSeat">
             <Form.Label>Price Per Seat</Form.Label>
-            <Form.Control type="number" step="0.01" />
+            <Form.Control
+              type="number"
+              step="0.01"
+              name="pricePerSeat"
+              onChange={handleChange}
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
@@ -149,7 +206,7 @@ export default function ShowtimeForm({ show, onHide }) {
         >
           Close
         </Button>
-        <Button variant="primary" onClick={onHide}>
+        <Button variant="primary" onClick={handleAddShow}>
           Save
         </Button>
       </Modal.Footer>
