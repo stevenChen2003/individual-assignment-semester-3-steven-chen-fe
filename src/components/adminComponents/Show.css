@@ -1,0 +1,16 @@
+.seat {
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 10px;
+  white-space: nowrap;
+  border-radius: 15%;
+}
+
+.unavailable-seat {
+  background-color: black !important;
+  pointer-events: none;
+}

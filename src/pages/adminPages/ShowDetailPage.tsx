@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ShowtimeApi from '../api/ShowtimeApi';
-import ShowCard from '../components/adminComponents/ShowCard';
+import ShowtimeApi from '../../api/ShowtimeApi';
+import ShowCard from '../../components/adminComponents/ShowCard';
+import ShowLayout from '../../components/ShowLayout';
 
 export default function ShowDetailPage() {
   const { id } = useParams();
@@ -16,10 +17,10 @@ export default function ShowDetailPage() {
       ]);
 
       setShowtime(showtimeData);
-      setSeats(seatsData);
+      setSeats(seatsData.seats);
 
       console.log(showtimeData);
-      console.log(seatsData);
+      console.log("Test",seatsData);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -42,7 +43,8 @@ export default function ShowDetailPage() {
               <ShowCard showtime={showtime} />
             </div>
             <div className='col-7'>
-              <h3>Test</h3>
+              <h3>Bookings:</h3>
+              <ShowLayout seats={seats}/>
             </div>
           </div>
         </div>

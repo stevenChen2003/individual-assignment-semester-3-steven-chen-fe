@@ -12,7 +12,8 @@ import PersonalPage from "./pages/PersonalPage";
 import CinemasPage from "./pages/adminPages/CinemasPage";
 import HallPage from "./pages/HallPage";
 import ShowtimePage from "./pages/adminPages/ShowtimePage";
-import ShowDetailPage from "./pages/ShowDetailPage";
+import ShowDetailPage from "./pages/adminPages/ShowDetailPage";
+import CinemaPage from "./pages/CinemaPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signUp" element={<SignUp />} />
+          <Route path="/cinema" element={<CinemaPage />} />
           <Route path="/movie/:id" element={<MovieDetailPage />} />
           <Route
             path="/admin/showtime"
