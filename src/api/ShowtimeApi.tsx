@@ -12,6 +12,9 @@ const ShowtimeApi = {
     getShowtimeByHallId: (hallId: any) => axios.get(`/showtime?hallId=${hallId}`)
     .then(response => response.data),
 
+    getShowtimeByCinemaAndDate: (cinemaId: any, day: string) => axios.get(`/showtime/cinema?cinemaId=${cinemaId}&day=${day}`)
+   .then(response => response.data),
+
     getShowtime: (showtimeId: any) => axios.get(`/showtime/${showtimeId}`)
     .then(response => response.data),
 
