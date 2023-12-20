@@ -79,9 +79,11 @@ export default function ShowtimeForm({ show, onHide }) {
 
   const handleChange = (e) => {
     setShowtime({ ...showtime, [e.target.name]: e.target.value });
+    console.log(showtime);
   };
 
   const handleAddShow = () => {
+    console.log("Showtime", showtime);
     // Make the API call here
     ShowtimeApi.addShowtime(showtime)
       .then((response) => {

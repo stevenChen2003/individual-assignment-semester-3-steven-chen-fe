@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import logo from "../../assets/images/logo.png";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
 import TokenManager from "../../api/TokenManager";
+import logo from "../../assets/images/logo.png";
+import "bootstrap/dist/css/bootstrap.min.css";
+import NavBarAdmin from "./NavBarAdmin";
+import NavBarCustomer from "./NavBarCustomer";
+import NavBarNonLoggedIn from "./NavBarNonLoggedIn";
 
 export default function NavBar() {
   const navigate = useNavigate();
@@ -51,34 +54,16 @@ export default function NavBar() {
             </li>
             {isLoggedIn ? (
               <>
+                {claims.roles.includes("Admin") ? (
+                  <NavBarAdmin />
+                ) : (
+                  <NavBarCustomer />
+                )}
                 <li className="nav-item">
                   <Link className="nav-link" to={`/user/${claims.userId}`}>
                     Personal
                   </Link>
                 </li>
-                {claims?.roles?.includes("Admin") && (
-                  <>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/admin/cinema">
-                        Cinema
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/admin/movie">
-                        Movie
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/admin/showtime">
-                        Showtime
-                      </Link>
-                    </li>
-                  </>
-                )}
-
-                {/* {claims?.roles?.includes('Customer') && (
-                )} */}
-
                 <li className="nav-item">
                   <button
                     className="nav-link btn btn-link"
@@ -89,11 +74,7 @@ export default function NavBar() {
                 </li>
               </>
             ) : (
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
-              </li>
+              <NavBarNonLoggedIn />
             )}
           </ul>
         </div>
