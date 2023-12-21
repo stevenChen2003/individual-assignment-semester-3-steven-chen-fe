@@ -177,6 +177,7 @@ export default function ShowtimeForm({ show, onHide }) {
               type="datetime-local"
               name="startTime"
               onChange={handleChange}
+              min={new Date(new Date().getTime()).toISOString().slice(0,10) + "T00:00"}
             />
           </Form.Group>
           <Form.Group controlId="endTime">
@@ -185,6 +186,7 @@ export default function ShowtimeForm({ show, onHide }) {
               type="datetime-local"
               name="endTime"
               onChange={handleChange}
+              min={new Date(new Date().getTime()).toISOString().slice(0,10) + "T00:00"}
             />
           </Form.Group>
           <Form.Group controlId="pricePerSeat">
