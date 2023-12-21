@@ -72,17 +72,30 @@ export default function SupportChatComponent() {
   };
 
   return (
-    <div className="container mt-3 border border-dark">
-      <ChatMessagesPlaceholder
-        username={username}
-        messagesReceived={messagesReceived}
-      />
-      <br></br>
-      <UsernamePlaceholder
-        username={username}
-        onUsernameInformed={onUsernameInformed}
-      />
-      <SendMessagePlaceholder username={username} onMessageSend={sendMessage} />
+    <div className="container mt-3 border border-dark" style={{height: '500px'}}>
+      {username ? (
+        <>
+          <ChatMessagesPlaceholder
+            username={username}
+            messagesReceived={messagesReceived}
+          />
+          <br></br>
+          <UsernamePlaceholder
+            username={username}
+            onUsernameInformed={onUsernameInformed}
+          />
+          <SendMessagePlaceholder username={username} onMessageSend={sendMessage} />
+        </>
+      ) : (
+        <div className="container">
+          <h2>Chat support</h2>
+          <hr/>
+          <UsernamePlaceholder
+            username={username}
+            onUsernameInformed={onUsernameInformed}
+          />
+        </div>
+      )}
     </div>
-  );
+   );
 }
