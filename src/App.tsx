@@ -14,6 +14,7 @@ import HallPage from "./pages/HallPage";
 import ShowtimePage from "./pages/adminPages/ShowtimePage";
 import ShowDetailPage from "./pages/adminPages/ShowDetailPage";
 import CinemaPage from "./pages/CinemaPage";
+import SupportPage from "./pages/SupportPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/cinema" element={<CinemaPage />} />
           <Route path="/movie/:id" element={<MovieDetailPage />} />
+          <Route path="/support" element={<SupportPage />} />
           <Route
             path="/admin/showtime"
             element={
