@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import WeeklyCalendar from "../components/commonComponents/WeeklyCalendar";
 import CinemaApi from "../api/CinemaApi";
 import CinemaSelect from "../components/adminComponents/CinemaSelect";
-import ShowTable from "../components/adminComponents/ShowTable";
 import ShowtimeApi from "../api/ShowtimeApi";
+import ShowList from "../components/commonComponents/ShowList";
 
 export default function CinemaPage() {
   const [cinemas, setCinemas] = useState([]);
@@ -94,7 +94,7 @@ export default function CinemaPage() {
             <hr />
             <h2>Showtimes</h2>
             <div>
-              <ShowTable showtimes={showtimes} />
+              <ShowList showtimes={showtimes} />
             </div>
           </div>
         </div>
