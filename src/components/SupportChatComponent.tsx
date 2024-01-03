@@ -3,11 +3,19 @@ import React, { useState } from "react";
 import UsernamePlaceholder from "./commonComponents/UsernamePlaceholder";
 import SendMessagePlaceholder from "./commonComponents/SendMessagePlaceholder";
 import ChatMessagesPlaceholder from "./commonComponents/ChatMessagesPlaceholder";
+import MovieSelect from "./MovieSelect";
+import { Button } from "react-bootstrap";
 
 export default function SupportChatComponent() {
+  const [movieId, setMovieId] = useState();
   const [stompClient, setStompClient] = useState();
   const [username, setUsername] = useState();
   const [messagesReceived, setMessagesReceived] = useState([]);
+
+  const handleSelect = (selectedMovieId) => {
+    setMovieId(selectedMovieId);
+    console.log("Movie Id", movieId);
+  }
 
   const setupStompClient = (username) => {
     // stomp client over websockets
@@ -19,13 +27,15 @@ export default function SupportChatComponent() {
     });
 
     stompClient.onConnect = () => {
-      // subscribe to the backend public topic
-      stompClient.subscribe("/topic/publicmessages", (data) => {
+      // subscribe to the backend public topic and base on the movie id
+
+      stompClient.subscribe(`/topic/movie/${movieId}`, (data) => {
         console.log(data);
         onMessageReceived(data);
-      });
+       });
 
       // subscribe to the backend "private" topic
+      //not needed?
       stompClient.subscribe(`/user/${username}/queue/inboxmessages`, (data) => {
         onMessageReceived(data);
       });
@@ -45,6 +55,7 @@ export default function SupportChatComponent() {
       from: username,
       to: newMessage.to,
       text: newMessage.text,
+      movieId: movieId,
     };
     if (payload.to) {
       stompClient.publish({
@@ -53,7 +64,7 @@ export default function SupportChatComponent() {
       });
     } else {
       stompClient.publish({
-        destination: "/topic/publicmessages",
+        destination: `/topic/movie/${movieId}`,
         body: JSON.stringify(payload),
       });
     }
@@ -88,12 +99,19 @@ export default function SupportChatComponent() {
         </>
       ) : (
         <div className="container">
-          <h2>Chat support</h2>
+          <h2>Public Chat</h2>
           <hr/>
+          <h3>Select Movie:</h3>
+          <MovieSelect onSelect={handleSelect}/>
           <UsernamePlaceholder
             username={username}
             onUsernameInformed={onUsernameInformed}
           />
+          <div className="d-grid mt-3">
+            <Button variant="primary">
+              Join Chat
+            </Button>
+          </div>
         </div>
       )}
     </div>
