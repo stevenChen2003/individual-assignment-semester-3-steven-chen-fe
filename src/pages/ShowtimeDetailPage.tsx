@@ -47,33 +47,34 @@ export default function ShowtimeDetailPage() {
   return (
     <div className="container-fluid h-100 bg-warning pb-3 pt-3">
       <div className="container">
-      <h2>Show details:</h2>
-      <hr></hr>
-      {showtime === null ? (
-        <p>No information</p>
-      ) : (
-        <div className="container">
-          <div className="row">
-            <div className="col-5">
-              <ShowCard showtime={showtime} />
-            </div>
-            <div className="col-7">
-              <h3>Bookings:</h3>
-              <ShowLayout
-                seats={seats}
-                selectedSeats={selectedSeats}
-                handleSeatClick={handleSeatClick}
-              />
-            </div>
+        <h2>Show details:</h2>
+        <hr></hr>
+        {showtime === null ? (
+          <p>No information</p>
+        ) : (
+          <div className="container">
             <div className="row">
-              <BookingInformation selectedSeats={selectedSeats} showtime={showtime} />
+              <div className="col-5">
+                <ShowCard showtime={showtime} />
+              </div>
+              <div className="col-7">
+                <h3>Bookings:</h3>
+                <ShowLayout
+                  seats={seats}
+                  selectedSeats={selectedSeats}
+                  handleSeatClick={handleSeatClick}
+                />
+              </div>
+              <div className="row">
+                <BookingInformation
+                  selectedSeats={selectedSeats}
+                  showtime={showtime}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
-
-    </div>
-    
   );
 }
