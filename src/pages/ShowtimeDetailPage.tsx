@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ShowtimeApi from "../api/ShowtimeApi";
 import ShowCard from "../components/adminComponents/ShowCard";
 import ShowLayout from "../components/ShowLayout";
+import BookingInformation from "../components/BookingInfo";
 
 export default function ShowtimeDetailPage() {
   const { id } = useParams();
@@ -44,7 +45,8 @@ export default function ShowtimeDetailPage() {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container-fluid h-100 bg-warning pb-3 pt-3">
+      <div className="container">
       <h2>Show details:</h2>
       <hr></hr>
       {showtime === null ? (
@@ -63,9 +65,15 @@ export default function ShowtimeDetailPage() {
                 handleSeatClick={handleSeatClick}
               />
             </div>
+            <div className="row">
+              <BookingInformation selectedSeats={selectedSeats} showtime={showtime} />
+            </div>
           </div>
         </div>
       )}
     </div>
+
+    </div>
+    
   );
 }
