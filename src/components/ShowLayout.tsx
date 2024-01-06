@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import "./adminComponents/Show.css";
 
@@ -23,6 +23,10 @@ const ShowLayout = ({ seats }) => {
     groups[seat.rowNumber].push(seat);
     return groups;
   }, {});
+
+  useEffect(() => {
+    console.log("Booking", selectedSeats);
+  }, [selectedSeats]);
 
   return (
     <div className="container">

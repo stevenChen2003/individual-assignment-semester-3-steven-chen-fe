@@ -15,6 +15,7 @@ import ShowtimePage from "./pages/adminPages/ShowtimePage";
 import ShowDetailPage from "./pages/adminPages/ShowDetailPage";
 import CinemaPage from "./pages/CinemaPage";
 import SupportPage from "./pages/SupportPage";
+import ShowtimeDetailPage from "./pages/ShowtimeDetailPage";
 
 function App() {
   return (
@@ -41,6 +42,14 @@ function App() {
             element={
               <PrivateRoute roles={["Admin"]}>
                 <ShowDetailPage />
+              </PrivateRoute>
+            }
+          />
+           <Route
+            path="/show/:id"
+            element={
+              <PrivateRoute roles={["Admin", "Customer"]}>
+                <ShowtimeDetailPage />
               </PrivateRoute>
             }
           />
