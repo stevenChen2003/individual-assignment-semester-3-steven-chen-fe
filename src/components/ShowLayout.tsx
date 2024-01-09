@@ -23,8 +23,8 @@ const ShowLayout = ({ seats, selectedSeats, handleSeatClick}) => {
         {row.map((seat) => (
           <div className="seat" key={seat.seatId}>
             <Button
-              disabled={seat.status == 'UNAVAILABLE'}
-              className={`h-100 ${seat.status == 'UNAVAILABLE' ? 'unavailable-seat' : ''}`}
+              disabled={seat.status == 'BOOKED'}
+              className={`h-100 ${seat.status == 'BOOKED' ? 'unavailable-seat' : ''}`}
               variant={
                selectedSeats.includes(seat.seatId) ? "primary" : "secondary"
               }

@@ -11,6 +11,6 @@
 }
 
 .unavailable-seat {
-  background-color: black !important;
+  background-color: red !important;
   pointer-events: none;
 }
