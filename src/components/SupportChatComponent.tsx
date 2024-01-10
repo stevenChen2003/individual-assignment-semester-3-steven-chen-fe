@@ -5,6 +5,7 @@ import ChatMessagesPlaceholder from "./commonComponents/ChatMessagesPlaceholder"
 import MovieSelect from "./MovieSelect";
 import { Button } from "react-bootstrap";
 import TokenManager from "../api/TokenManager";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function SupportChatComponent() {
   const [movieId, setMovieId] = useState();
@@ -79,12 +80,18 @@ export default function SupportChatComponent() {
   };
 
   const handleJoinChat = () => {
+    if (!movieId) {
+      toast.dismiss();
+      toast.error("Please select a movie before joining the chat.");
+      return;
+    }
     setUsername(claims.sub);
     setupStompClient(claims.sub);
   };
 
   return (
     <div className="container mt-3 border border-dark" style={{height: '500px'}}>
+      <ToastContainer />
       {username ? (
         <>
           <ChatMessagesPlaceholder
