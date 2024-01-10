@@ -28,7 +28,6 @@ function App() {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/cinema" element={<CinemaPage />} />
           <Route path="/movie/:id" element={<MovieDetailPage />} />
-          <Route path="/support" element={<SupportPage />} />
           <Route
             path="/admin/showtime"
             element={
@@ -45,11 +44,19 @@ function App() {
               </PrivateRoute>
             }
           />
-           <Route
+          <Route
             path="/show/:id"
             element={
               <PrivateRoute roles={["Admin", "Customer"]}>
                 <ShowtimeDetailPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/support"
+            element={
+              <PrivateRoute roles={["Admin", "Customer"]}>
+                <SupportPage />
               </PrivateRoute>
             }
           />
