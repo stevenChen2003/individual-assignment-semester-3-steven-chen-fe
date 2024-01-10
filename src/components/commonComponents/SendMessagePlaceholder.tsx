@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 const SendMessagePlaceholder = (props) => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   if (!props.username) {
     return <></>;
@@ -13,7 +14,7 @@ const SendMessagePlaceholder = (props) => {
     }
 
     props.onMessageSend({ text: message });
-    setMessage('');
+    setMessage("");
   };
 
   const onSubmit = (event) => {
@@ -23,17 +24,19 @@ const SendMessagePlaceholder = (props) => {
   return (
     <form id="messagePanel" onSubmit={onSubmit}>
       <input
-        id='message'
-        type='text'
+        className="w-50 mx-2"
+        id="message"
+        type="text"
         onChange={(event) => setMessage(event.target.value)}
         value={message}
       ></input>
-      <button
+      <Button
+        variant="primary"
         onClick={onMessageSend}
         disabled={!message.trim()}
       >
         Send
-      </button>
+      </Button>
     </form>
   );
 };

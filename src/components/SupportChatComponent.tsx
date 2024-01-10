@@ -3,19 +3,21 @@ import React, { useState } from "react";
 import SendMessagePlaceholder from "./commonComponents/SendMessagePlaceholder";
 import ChatMessagesPlaceholder from "./commonComponents/ChatMessagesPlaceholder";
 import MovieSelect from "./MovieSelect";
-import { Button } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import TokenManager from "../api/TokenManager";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function SupportChatComponent() {
   const [movieId, setMovieId] = useState();
+  const [movie, setMovie] = useState();
   const [stompClient, setStompClient] = useState();
   const [username, setUsername] = useState();
   const [messagesReceived, setMessagesReceived] = useState([]);
   const claims = TokenManager.getClaims();
 
-  const handleSelect = (selectedMovieId) => {
-    setMovieId(selectedMovieId);
+  const handleSelect = (selectedMovie) => {
+    setMovie(selectedMovie);
+    setMovieId(selectedMovie.value);
     console.log("Movie Id", movieId);
   };
 
@@ -86,27 +88,48 @@ export default function SupportChatComponent() {
   return (
     <div
       className="container mt-3 border border-dark"
-      style={{ height: "500px" }}
+      style={{ height: "550px" }}
     >
       <ToastContainer />
       {username ? (
         <>
-          <h3>Public chat:</h3>
-          <hr />
-          <ChatMessagesPlaceholder
-            username={username}
-            messagesReceived={messagesReceived}
-          />
-          <br></br>
-          <SendMessagePlaceholder
-            username={username}
-            onMessageSend={sendMessage}
-          />
-          <div className="d-grid mt-3">
-            <Button variant="danger" onClick={handleLeaveChat}>
-              Leave Chat
-            </Button>
-          </div>
+          <Container>
+            <h3>Public chat:</h3>
+            <hr />
+            <Row>
+              <Col className="border-end border-3 border-grey">
+                <Card.Title>Title: {movie.label}</Card.Title>
+                <hr />
+                <Card.Img
+                  variant="top"
+                  src={movie.image}
+                  style={{
+                    height: "280px",
+                    width: "200px",
+                    objectFit: "cover",
+                  }}
+                />
+                <div className="mt-3">
+                  <Button variant="danger" onClick={handleLeaveChat}>
+                    Leave Chat
+                  </Button>
+                </div>
+              </Col>
+              <Col md="9">
+                <ChatMessagesPlaceholder
+                  username={username}
+                  messagesReceived={messagesReceived}
+                />
+                <hr/>
+                <div className="container">
+                <SendMessagePlaceholder
+                  username={username}
+                  onMessageSend={sendMessage}
+                />
+                </div>
+              </Col>
+            </Row>
+          </Container>
         </>
       ) : (
         <div className="container">

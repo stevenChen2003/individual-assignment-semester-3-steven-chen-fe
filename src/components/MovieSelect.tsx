@@ -26,7 +26,7 @@ const MovieSelect = ({ onSelect }) => {
   
     const handleSelect = (selectedOption) => {
       if (selectedOption) {
-        onSelect(selectedOption.value);
+        onSelect(selectedOption);
       } else {
         onSelect(null);
       }
