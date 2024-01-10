@@ -89,6 +89,13 @@ export default function SupportChatComponent() {
     setupStompClient(claims.sub);
   };
 
+  const handleLeaveChat = () => {
+    stompClient.deactivate();
+    setStompClient(null);
+    setUsername(null);
+    setMessagesReceived([]);
+  };
+
   return (
     <div className="container mt-3 border border-dark" style={{height: '500px'}}>
       <ToastContainer />
@@ -100,6 +107,11 @@ export default function SupportChatComponent() {
           />
           <br></br>
           <SendMessagePlaceholder username={username} onMessageSend={sendMessage} />
+          <div className="d-grid mt-3">
+            <Button variant="danger" onClick={handleLeaveChat}>
+              Leave Chat
+            </Button>
+          </div>
         </>
       ) : (
         <div className="container">

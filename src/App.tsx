@@ -14,8 +14,8 @@ import HallPage from "./pages/HallPage";
 import ShowtimePage from "./pages/adminPages/ShowtimePage";
 import ShowDetailPage from "./pages/adminPages/ShowDetailPage";
 import CinemaPage from "./pages/CinemaPage";
-import SupportPage from "./pages/SupportPage";
 import ShowtimeDetailPage from "./pages/ShowtimeDetailPage";
+import ChatPage from "./pages/ChatPage";
 
 function App() {
   return (
@@ -53,10 +53,10 @@ function App() {
             }
           />
           <Route
-            path="/support"
+            path="/chat"
             element={
               <PrivateRoute roles={["Admin", "Customer"]}>
-                <SupportPage />
+                <ChatPage />
               </PrivateRoute>
             }
           />
