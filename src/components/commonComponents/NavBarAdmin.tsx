@@ -5,11 +5,6 @@ const NavBarAdmin = () => {
   return (
     <>
       <li className="nav-item">
-        <Link className="nav-link" to="/admin/cinema">
-          Cinema
-        </Link>
-      </li>
-      <li className="nav-item">
         <Link className="nav-link" to="/admin/movie">
           Movie
         </Link>
@@ -17,6 +12,16 @@ const NavBarAdmin = () => {
       <li className="nav-item">
         <Link className="nav-link" to="/admin/showtime">
           Showtime
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/admin/cinema">
+          Cinema
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/chat">
+          Chat
         </Link>
       </li>
     </>

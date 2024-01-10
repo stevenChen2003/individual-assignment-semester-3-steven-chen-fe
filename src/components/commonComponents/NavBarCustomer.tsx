@@ -10,8 +10,13 @@ const NavBarCustomer = () => {
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/movie">
+        <Link className="nav-link" to="/">
           Movie
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/chat">
+          Chat
         </Link>
       </li>
       {/* <>Booking</> */}
