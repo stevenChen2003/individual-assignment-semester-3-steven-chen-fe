@@ -13,11 +13,11 @@ export default function SupportChatComponent() {
   const [username, setUsername] = useState();
   const [messagesReceived, setMessagesReceived] = useState([]);
   const claims = TokenManager.getClaims();
-  
+
   const handleSelect = (selectedMovieId) => {
     setMovieId(selectedMovieId);
     console.log("Movie Id", movieId);
-  }
+  };
 
   const setupStompClient = (username) => {
     // stomp client over websockets
@@ -30,15 +30,8 @@ export default function SupportChatComponent() {
 
     stompClient.onConnect = () => {
       // subscribe to the backend public topic and base on the movie id
-
       stompClient.subscribe(`/topic/movie/${movieId}`, (data) => {
         console.log(data);
-        onMessageReceived(data);
-       });
-
-      // subscribe to the backend "private" topic
-      //not needed?
-      stompClient.subscribe(`/user/${username}/queue/inboxmessages`, (data) => {
         onMessageReceived(data);
       });
     };
@@ -55,21 +48,14 @@ export default function SupportChatComponent() {
   const sendMessage = (newMessage) => {
     const payload = {
       from: username,
-      to: newMessage.to,
       text: newMessage.text,
       movieId: movieId,
     };
-    if (payload.to) {
-      stompClient.publish({
-        destination: `/user/${payload.to}/queue/inboxmessages`,
-        body: JSON.stringify(payload),
-      });
-    } else {
-      stompClient.publish({
-        destination: `/topic/movie/${movieId}`,
-        body: JSON.stringify(payload),
-      });
-    }
+
+    stompClient.publish({
+      destination: `/topic/movie/${movieId}`,
+      body: JSON.stringify(payload),
+    });
   };
 
   // display the received data
@@ -91,22 +77,31 @@ export default function SupportChatComponent() {
 
   const handleLeaveChat = () => {
     stompClient.deactivate();
+    setMovieId(null);
     setStompClient(null);
     setUsername(null);
     setMessagesReceived([]);
   };
 
   return (
-    <div className="container mt-3 border border-dark" style={{height: '500px'}}>
+    <div
+      className="container mt-3 border border-dark"
+      style={{ height: "500px" }}
+    >
       <ToastContainer />
       {username ? (
         <>
+          <h3>Public chat:</h3>
+          <hr />
           <ChatMessagesPlaceholder
             username={username}
             messagesReceived={messagesReceived}
           />
           <br></br>
-          <SendMessagePlaceholder username={username} onMessageSend={sendMessage} />
+          <SendMessagePlaceholder
+            username={username}
+            onMessageSend={sendMessage}
+          />
           <div className="d-grid mt-3">
             <Button variant="danger" onClick={handleLeaveChat}>
               Leave Chat
@@ -116,9 +111,9 @@ export default function SupportChatComponent() {
       ) : (
         <div className="container">
           <h2>Public Chat</h2>
-          <hr/>
+          <hr />
           <h3>Select Movie:</h3>
-          <MovieSelect onSelect={handleSelect}/>
+          <MovieSelect onSelect={handleSelect} />
           <div className="d-grid mt-3">
             <Button variant="primary" onClick={handleJoinChat}>
               Join Chat
@@ -127,5 +122,5 @@ export default function SupportChatComponent() {
         </div>
       )}
     </div>
-   );
+  );
 }

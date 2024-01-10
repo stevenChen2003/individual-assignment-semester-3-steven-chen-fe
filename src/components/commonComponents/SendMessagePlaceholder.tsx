@@ -2,32 +2,40 @@ import { useState } from "react";
 
 const SendMessagePlaceholder = (props) => {
   const [message, setMessage] = useState('');
-  const [destinationUsername, setDestinationUsername] = useState('');
 
   if (!props.username) {
     return <></>;
   }
 
   const onMessageSend = () => {
-    if (!message) {
-      alert('Please type a message!');
+    if (!message.trim()) {
+      return;
     }
 
-    props.onMessageSend({ 'text': message, 'to': destinationUsername });
+    props.onMessageSend({ text: message });
     setMessage('');
-  }
+  };
 
   const onSubmit = (event) => {
     event.preventDefault();
-  }
+  };
 
   return (
     <form id="messagePanel" onSubmit={onSubmit}>
-      <label htmlFor='message'>Message:</label>
-      <input id='message' type='text' onChange={(event) => setMessage(event.target.value)} value={message}></input>
-      <button onClick={onMessageSend}>Send</button>
+      <input
+        id='message'
+        type='text'
+        onChange={(event) => setMessage(event.target.value)}
+        value={message}
+      ></input>
+      <button
+        onClick={onMessageSend}
+        disabled={!message.trim()}
+      >
+        Send
+      </button>
     </form>
   );
-}
+};
 
 export default SendMessagePlaceholder;
