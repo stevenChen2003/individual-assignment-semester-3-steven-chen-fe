@@ -1,17 +1,18 @@
 import { Client } from "@stomp/stompjs";
 import React, { useState } from "react";
-import UsernamePlaceholder from "./commonComponents/UsernamePlaceholder";
 import SendMessagePlaceholder from "./commonComponents/SendMessagePlaceholder";
 import ChatMessagesPlaceholder from "./commonComponents/ChatMessagesPlaceholder";
 import MovieSelect from "./MovieSelect";
 import { Button } from "react-bootstrap";
+import TokenManager from "../api/TokenManager";
 
 export default function SupportChatComponent() {
   const [movieId, setMovieId] = useState();
   const [stompClient, setStompClient] = useState();
   const [username, setUsername] = useState();
   const [messagesReceived, setMessagesReceived] = useState([]);
-
+  const claims = TokenManager.getClaims();
+  
   const handleSelect = (selectedMovieId) => {
     setMovieId(selectedMovieId);
     console.log("Movie Id", movieId);
@@ -77,9 +78,9 @@ export default function SupportChatComponent() {
     setMessagesReceived((messagesReceived) => [...messagesReceived, message]);
   };
 
-  const onUsernameInformed = (username) => {
-    setUsername(username);
-    setupStompClient(username);
+  const handleJoinChat = () => {
+    setUsername(claims.sub);
+    setupStompClient(claims.sub);
   };
 
   return (
@@ -91,10 +92,6 @@ export default function SupportChatComponent() {
             messagesReceived={messagesReceived}
           />
           <br></br>
-          <UsernamePlaceholder
-            username={username}
-            onUsernameInformed={onUsernameInformed}
-          />
           <SendMessagePlaceholder username={username} onMessageSend={sendMessage} />
         </>
       ) : (
@@ -103,12 +100,8 @@ export default function SupportChatComponent() {
           <hr/>
           <h3>Select Movie:</h3>
           <MovieSelect onSelect={handleSelect}/>
-          <UsernamePlaceholder
-            username={username}
-            onUsernameInformed={onUsernameInformed}
-          />
           <div className="d-grid mt-3">
-            <Button variant="primary">
+            <Button variant="primary" onClick={handleJoinChat}>
               Join Chat
             </Button>
           </div>
