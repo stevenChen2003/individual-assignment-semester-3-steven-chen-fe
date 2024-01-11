@@ -8,6 +8,7 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
   const [genres, setGenres] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -25,6 +26,22 @@ const HomePage = () => {
     fetchMovies();
   }, []);
 
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        console.log("Search",searchTerm);
+        console.log("Genre",selectedGenre);
+        const moviesResponse = await MovieApi.searchMovies(searchTerm, selectedGenre, currentPage, 5);
+        console.log("Test",moviesResponse);
+        setMovies(moviesResponse.content);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    };
+ 
+    fetchMovies();
+  }, [searchTerm, selectedGenre, currentPage]);
+
   const handleSearchChange = (value) => {
     setSearchTerm(value);
   };
@@ -32,12 +49,6 @@ const HomePage = () => {
   const handleGenreChange = (value) => {
     setSelectedGenre(value);
   };
-
-  const filteredMovies = movies.filter(
-    (movie) =>
-      movie.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (selectedGenre === '' || movie.genre === selectedGenre)
-  );
 
   return (
     <div className="container mt-3">
@@ -50,7 +61,7 @@ const HomePage = () => {
           />
         </div>
         <div className="col-md-9">
-          <MovieList movies={filteredMovies} />
+          <MovieList movies={movies} />
         </div>
       </div>
     </div>

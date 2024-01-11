@@ -10,7 +10,7 @@ const FilterBar = ({ onSearchChange, onGenreChange, genres }) => {
         onChange={(e) => onSearchChange(e.target.value)}
       />
       <select className="form-control" onChange={(e) => onGenreChange(e.target.value)}>
-        <option value="">All Genres</option>
+        <option value= "" >All Genres</option>
         {genres.map((genre) => (
           <option key={genre} value={genre}>
             {genre}
