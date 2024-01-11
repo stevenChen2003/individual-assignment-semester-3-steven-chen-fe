@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { format, addMinutes } from 'date-fns';
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import Select from "react-select";
 import CinemaApi from "../../api/CinemaApi";
@@ -84,8 +85,13 @@ export default function ShowtimeForm({ show, onHide }) {
 
   const handleAddShow = () => {
     console.log("Showtime", showtime);
+    const formattedShowtime = {
+      ...showtime,
+      startTime: format(new Date(showtime.startTime), "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"),
+      endTime: format(new Date(showtime.endTime), "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"),
+    };
     // Make the API call here
-    ShowtimeApi.addShowtime(showtime)
+    ShowtimeApi.addShowtime(formattedShowtime)
       .then((response) => {
         console.log(response);
         // Reset the showtime state
