@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { format, addMinutes } from 'date-fns';
+import { format } from 'date-fns';
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import Select from "react-select";
 import CinemaApi from "../../api/CinemaApi";
