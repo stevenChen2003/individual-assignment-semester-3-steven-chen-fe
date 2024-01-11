@@ -18,8 +18,16 @@ export default function ShowtimeDetailPage() {
         ShowtimeApi.getSeats(id),
       ]);
 
-      setShowtime(showtimeData);
-      setSeats(seatsData.seats);
+      const showtimeDate = new Date(showtimeData.startTime);
+      const currentDate = new Date();
+
+      if (showtimeDate < currentDate) {
+        setShowtime(null);
+        setSeats([]);
+      } else {
+        setShowtime(showtimeData);
+        setSeats(seatsData.seats);
+      }
 
       console.log(showtimeData);
       console.log("Test", seatsData);
@@ -45,8 +53,8 @@ export default function ShowtimeDetailPage() {
   };
 
   return (
-    <div className="container-fluid h-100 bg-warning pb-3 pt-3">
-      <div className="container">
+    <div className="container-fluid min-vh-100 d-flex flex-column bg-warning pb-3 pt-3">
+      <div className="container min-vh-100">
         <h2>Show details:</h2>
         <hr></hr>
         {showtime === null ? (
