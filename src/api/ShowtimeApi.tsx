@@ -19,7 +19,12 @@ const ShowtimeApi = {
     .then(response => response.data),
 
     getSeats: (showtimeId: any) => axios.get(`/showtime/seats?showtimeId=${showtimeId}`)
-    .then(response => response.data)
+    .then(response => response.data),
+
+    updateShowtime: (updateShowtime: {showtimeId: any; }) => axios.put(`/cinemas/${updateShowtime.showtimeId}`, updateShowtime, 
+    {
+        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+    })
 
 }
 
