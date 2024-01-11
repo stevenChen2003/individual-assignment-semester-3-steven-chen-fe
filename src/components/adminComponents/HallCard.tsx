@@ -19,13 +19,13 @@ const HallCard = ({ hall, setHalls }) => {
       <Card.Body>
         <Card.Title>{`Hall number: ${hall.hallNumber}`}</Card.Title>
         <Card.Text>{`Capacity: ${hall.seatingCapacity} seats`}</Card.Text>
-        <Button
+        {/* <Button
           as={Link}
           variant="primary"
           className="mt-2"
         >
           View Details
-        </Button>
+        </Button> */}
         <Button variant="danger"className="mt-2" onClick={handleDelete}>Delete</Button>
       </Card.Body>
     </Card>
