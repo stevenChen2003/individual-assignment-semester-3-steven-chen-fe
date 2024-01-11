@@ -3,8 +3,7 @@ import { Pagination } from 'react-bootstrap';
 import MovieList from '../components/commonComponents/MovieList';
 import FilterBar from '../components/commonComponents/FilterBar';
 import MovieApi from '../api/MovieApi';
-
-const MAX_VISIBLE_PAGES = 5;
+import PaginationComponent from '../components/commonComponents/Pagination';
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -33,7 +32,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const moviesResponse = await MovieApi.searchMovies(searchTerm, selectedGenre, currentPage, 2);
+        const moviesResponse = await MovieApi.searchMovies(searchTerm, selectedGenre, currentPage, 1);
         setMovies(moviesResponse.content);
         setTotalPages(moviesResponse.totalPages);
       } catch (error) {
@@ -58,30 +57,6 @@ const HomePage = () => {
     setCurrentPage(page - 1);
   };
 
-  const renderPaginationItems = () => {
-    const items = [];
-    const startPage = Math.max(1, currentPage - Math.floor(MAX_VISIBLE_PAGES / 2));
-    const endPage = Math.min(startPage + MAX_VISIBLE_PAGES - 1, totalPages);
-
-    if (startPage > 1) {
-      items.push(<Pagination.Prev key="prev" onClick={() => handlePageChange(currentPage)} />);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      items.push(
-        <Pagination.Item key={i} active={i === currentPage + 1} onClick={() => handlePageChange(i)}>
-          {i}
-        </Pagination.Item>
-      );
-    }
-
-    if (endPage < totalPages) {
-      items.push(<Pagination.Next key="next" onClick={() => handlePageChange(currentPage + 2)} />);
-    }
-
-    return items;
-  };
-
   return (
     <div className="container mt-3">
       <div className="row">
@@ -94,7 +69,11 @@ const HomePage = () => {
         </div>
         <div className="col-md-9">
           <MovieList movies={movies} />
-          <Pagination>{renderPaginationItems()}</Pagination>
+          <PaginationComponent
+           currentPage={currentPage}
+           totalPages={totalPages}
+           onPageChange={handlePageChange}
+         />
         </div>
       </div>
     </div>
