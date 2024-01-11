@@ -6,6 +6,7 @@ import CinemaApi from "../../api/CinemaApi";
 import HallApi from "../../api/HallApi";
 import MovieApi from "../../api/MovieApi";
 import ShowtimeApi from "../../api/ShowtimeApi";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function ShowtimeForm({ show, onHide }) {
   const [cinemas, setCinemas] = useState([]);
@@ -107,6 +108,10 @@ export default function ShowtimeForm({ show, onHide }) {
       })
       .catch((error) => {
         console.error("Error creating show:", error);
+        toast.error("There is time conflict with other shows", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000,
+        });
       });
   };
 
@@ -119,6 +124,7 @@ export default function ShowtimeForm({ show, onHide }) {
       }}
       centered
     >
+      <ToastContainer/>
       <Modal.Header closeButton>
         <Modal.Title>ShowtimeForm</Modal.Title>
       </Modal.Header>
