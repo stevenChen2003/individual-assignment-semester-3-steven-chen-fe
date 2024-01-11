@@ -42,7 +42,7 @@ export default function ShowItem({ show }) {
           className="btn btn-primary mx-2"
           onClick={handleNavigateEditShowtime}
         >
-          Edit
+          View Details
         </button>
         <button className="btn btn-danger" onClick={handleDeleteMovie}>
           Delete
