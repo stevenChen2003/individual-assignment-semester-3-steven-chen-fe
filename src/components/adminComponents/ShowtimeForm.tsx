@@ -64,11 +64,6 @@ export default function ShowtimeForm({ show, onHide }) {
     label: `Hall number: ${hall.hallNumber}`,
   }));
 
-  //Sorting by Number
-  hallOptions.sort((a, b) =>
-    a.label.split(": ")[1].localeCompare(b.label.split(": ")[1])
-  );
-
   const movieOptions = movies.map((movie) => ({
     value: movie.movieId,
     label: movie.title,
