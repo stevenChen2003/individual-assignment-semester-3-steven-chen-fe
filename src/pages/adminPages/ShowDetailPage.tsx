@@ -31,7 +31,7 @@ export default function ShowDetailPage() {
 
   useEffect(() => {
     getShowInformation();
-  }, [id]);
+  }, [id, showtime]);
 
   const handleSeatClick = (seatId) => {
     setSelectedSeats((prevSeats) => {
@@ -73,9 +73,9 @@ export default function ShowDetailPage() {
           </div>
           {isEditFormOpen && (
             <EditForm
-              show={isEditFormOpen}
-              onHide={() => setIsEditFormOpen(false)}
-              initialShowtime={showtime}
+                show={isEditFormOpen}
+                onHide={() => setIsEditFormOpen(false)}
+                initialShowtime={showtime} getShowInformation={getShowInformation}              
             />
           )}
         </div>
