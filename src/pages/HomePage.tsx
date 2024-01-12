@@ -32,7 +32,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const moviesResponse = await MovieApi.searchMovies(searchTerm, selectedGenre, currentPage, 1);
+        const moviesResponse = await MovieApi.searchMovies(searchTerm, selectedGenre, currentPage, 2);
         setMovies(moviesResponse.content);
         setTotalPages(moviesResponse.totalPages);
       } catch (error) {
