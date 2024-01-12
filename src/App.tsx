@@ -16,6 +16,7 @@ import ShowDetailPage from "./pages/adminPages/ShowDetailPage";
 import CinemaPage from "./pages/CinemaPage";
 import ShowtimeDetailPage from "./pages/ShowtimeDetailPage";
 import ChatPage from "./pages/ChatPage";
+import AdminBookingPage from "./pages/adminPages/AdminBookingPage";
 
 function App() {
   return (
@@ -33,6 +34,14 @@ function App() {
             element={
               <PrivateRoute roles={["Admin"]}>
                 <ShowtimePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/booking"
+            element={
+              <PrivateRoute roles={["Admin"]}>
+                <AdminBookingPage />
               </PrivateRoute>
             }
           />
