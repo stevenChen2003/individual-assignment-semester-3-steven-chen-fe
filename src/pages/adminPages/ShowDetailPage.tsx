@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 import ShowtimeApi from "../../api/ShowtimeApi";
 import ShowCard from "../../components/adminComponents/ShowCard";
 import ShowLayout from "../../components/ShowLayout";
+import EditForm from "../../components/adminComponents/EditShowForm";
 
 export default function ShowDetailPage() {
   const { id } = useParams();
   const [showtime, setShowtime] = useState(null);
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [isEditFormOpen, setIsEditFormOpen] = useState(false);
 
   const getShowInformation = async () => {
     try {
@@ -43,6 +45,10 @@ export default function ShowDetailPage() {
     });
   };
 
+  const openEditForm = () => {
+    setIsEditFormOpen(true);
+  };
+
   return (
     <div className="container mt-4">
       <h2>Show details:</h2>
@@ -62,8 +68,16 @@ export default function ShowDetailPage() {
                 selectedSeats={selectedSeats}
                 handleSeatClick={handleSeatClick}
               />
+              <button onClick={openEditForm}>Edit Time</button>
             </div>
           </div>
+          {isEditFormOpen && (
+            <EditForm
+              show={isEditFormOpen}
+              onHide={() => setIsEditFormOpen(false)}
+              initialShowtime={showtime}
+            />
+          )}
         </div>
       )}
     </div>
