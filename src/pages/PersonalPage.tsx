@@ -4,6 +4,7 @@ import { Button, Card, Col, Container, Row, Modal } from 'react-bootstrap';
 
 import UserApi from '../api/UserApi';
 import EditUserForm from '../components/EditUserForm';
+import UserBookingPage from './UserBookingPage';
 
 export default function PersonalPage() {
   const { id } = useParams();
@@ -66,6 +67,8 @@ export default function PersonalPage() {
           </Card>
         </Col>
       </Row>
+
+      {user.role === 'Customer' && <UserBookingPage />}
 
       {/* Edit User Modal */}
       <Modal show={showEditModal} onHide={handleModalClose}>
