@@ -57,6 +57,11 @@ export default function ShowCard({ showtime }) {
             <br />
             <strong>Price per Seat:</strong> {showtime.pricePerSeat.toFixed(2)}
           </Card.Text>
+          <Card.Text>
+            <strong>Location:</strong> {cinema}
+            <br />
+            <strong>Hall Number:</strong> {showtime.hall.hallNumber}
+          </Card.Text>
         </Col>
       </Row>
     </Card>

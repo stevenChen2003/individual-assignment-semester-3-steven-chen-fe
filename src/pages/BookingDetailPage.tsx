@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BookingApi from "../api/BookingApi";
 import BookingDetail from "../components/BookingDetail";
+import ShowCard from "../components/adminComponents/ShowCard";
 
 export default function BookingDetailPage() {
   const { id } = useParams();
@@ -29,7 +30,19 @@ export default function BookingDetailPage() {
         <p>No information</p>
       ) : (
         <div className="container">
-          <BookingDetail booking={booking} />
+          <div className="row">
+            <div className="col-5">
+              <h4>Show information</h4>
+              <hr></hr>
+              <ShowCard showtime={booking.showtime} />
+            </div>
+            <div className="col-1">
+
+            </div>
+            <div className="col-6">
+              <BookingDetail booking={booking} />
+            </div>
+          </div>
         </div>
       )}
     </div>
