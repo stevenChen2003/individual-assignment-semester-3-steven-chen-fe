@@ -15,6 +15,11 @@ const NavBarAdmin = () => {
         </Link>
       </li>
       <li className="nav-item">
+        <Link className="nav-link" to="/admin/booking">
+          Booking
+        </Link>
+      </li>
+      <li className="nav-item">
         <Link className="nav-link" to="/admin/cinema">
           Cinema
         </Link>
