@@ -1,7 +1,10 @@
 import React from 'react'
 
-export default function BookingDetail() {
+export default function BookingDetail({booking}) {
+  
   return (
-    <div>BookingDetail</div>
+    <div>
+      <h2>Test</h2>
+    </div>
   )
 }

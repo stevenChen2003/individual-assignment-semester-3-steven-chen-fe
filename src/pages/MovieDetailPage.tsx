@@ -39,7 +39,6 @@ const MovieDetailPage = () => {
   }, [id]);
 
   if (!movie.title) {
-    // Loading state, you can replace it with a loading spinner or message
     return <div>Loading...</div>;
   }
 

@@ -4,12 +4,12 @@ import TokenManager from "./TokenManager";
 axios.defaults.baseURL = "http://localhost:8080";
 
 const BookingApi = {
-    addBooking: (newBooking: any) => axios.post("/bookings", newBooking,
-    {
-        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+  addBooking: (newBooking: any) =>
+    axios.post("/bookings", newBooking, {
+      headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` },
     }),
 
-    getAllBookingsByUser: (userId: any, page = 0, size = 5) =>
+  getAllBookingsByUser: (userId: any, page = 0, size = 5) =>
     axios.get("/bookings/getAllByUser", {
       params: { userId, page, size },
       headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` },
@@ -21,6 +21,17 @@ const BookingApi = {
       headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` },
     }),
 
-}
+  getBookingDetails: (bookingId) =>
+    axios.get(`/bookings/${bookingId}`, {
+      headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` },
+    })
+    .then((response) => response.data),
 
-export default BookingApi
+  cancelBooking: (bookingId) =>
+    axios.delete(`/bookings/${bookingId}`, {
+      headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` },
+    }),
+
+};
+
+export default BookingApi;
