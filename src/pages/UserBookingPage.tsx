@@ -7,7 +7,6 @@ import BookingApi from "../api/BookingApi";
 
 export default function UserBookingPage() {
   const [bookings, setBookings] = useState([]);
-  const [searchUserId, setSearchUserId] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
