@@ -21,8 +21,8 @@ export default function ShowTable({showtimes}) {
           <th>Action</th>
         </thead>
         <tbody>
-          {showtimes.showtimeList && showtimes.showtimeList.length > 0 ? (
-            showtimes.showtimeList.map((show) => (
+          {showtimes.length > 0 ? (
+            showtimes.map((show) => (
               <ShowItem key={show.showtimeId} show={show} />
             ))
           ) : (

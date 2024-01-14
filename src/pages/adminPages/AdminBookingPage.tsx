@@ -56,7 +56,7 @@ export default function AdminBookingPage() {
         </Form.Group>
       </Form>
 
-      <BookingTable  bookings={bookings} />
+      <BookingTable bookings={bookings} />
       <PaginationComponent currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
     </Container>
   );

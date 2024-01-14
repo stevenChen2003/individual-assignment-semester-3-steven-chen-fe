@@ -6,6 +6,7 @@ import CinemaApi from "../../api/CinemaApi";
 import HallApi from "../../api/HallApi";
 import ShowTable from "../../components/adminComponents/ShowTable";
 import ShowtimeApi from "../../api/ShowtimeApi";
+import PaginationComponent from "../../components/commonComponents/Pagination";
 
 export default function ShowtimePage() {
   const [show, setShow] = useState(false);
@@ -14,6 +15,8 @@ export default function ShowtimePage() {
   const [selectedCinema, setSelectedCinema] = useState(null);
   const [selectedHall, setSelectedHall] = useState(null);
   const [showtimes, setShowtimes] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   const cinemaOptions = cinemas.map((cinema) => ({
     value: cinema.cinemaId,
@@ -27,15 +30,18 @@ export default function ShowtimePage() {
 
   const handleCinemaChange = (selectedOption) => {
     setSelectedCinema(selectedOption);
+    setSelectedHall(null); // Reset selected hall when changing cinema
+    setShowtimes([]); // Clear showtimes when changing cinema
   };
 
   const handleHallChange = (selectedOption) => {
     setSelectedHall(selectedOption);
     console.log(selectedHall);
-    ShowtimeApi.getShowtimeByHallId(selectedOption.value)
+    ShowtimeApi.getShowtimeByHallId(selectedOption.value, currentPage, 7)
     .then(response => {
-      console.log(response);
-      setShowtimes(response)
+      console.log("Content",response);
+      setShowtimes(response.content)
+      setTotalPages(response.totalPages)
     })
   };
 
@@ -70,6 +76,21 @@ export default function ShowtimePage() {
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+  
+  const handlePageChange = (page) => {
+    setCurrentPage(page - 1);
+    // Fetch showtimes again when the page changes
+    if (selectedHall) {
+      ShowtimeApi.getShowtimeByHallId(selectedHall.value, page - 1, 7)
+        .then(response => {
+          setShowtimes(response.content);
+          setTotalPages(response.totalPages);
+        })
+        .catch(error => {
+          console.error("Error fetching showtimes:", error);
+        });
+    }
+  };
 
   return (
     <div className="container-fluid">
@@ -96,6 +117,7 @@ export default function ShowtimePage() {
           <h2>Showtimes</h2>
           <div>
             <ShowTable showtimes={showtimes}/>
+            <PaginationComponent currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
           </div>
         </div>
 
