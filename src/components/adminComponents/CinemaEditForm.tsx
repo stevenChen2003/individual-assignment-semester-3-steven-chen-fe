@@ -31,7 +31,6 @@ const CinemaEditForm = ({ show, handleClose, onGetCinemas, selectCinema }) => {
       .then((response) => {
         onGetCinemas();
         console.log("Cinema added successfully:", response);
-        toast.success("Cinema added successfully");
       })
       .catch((error) => {
         if (error.response.status === 400) {
