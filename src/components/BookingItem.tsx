@@ -1,11 +1,17 @@
 import React from "react";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 export default function BookingItem({ booking }) {
+  const navigate = useNavigate();
   const formattedDate = format(
     new Date(booking.bookingDate),
     "yyyy-MM-dd HH:mm"
   );
+
+  const handleNavigateBookingDetail= () => {
+    navigate("/bookingDetails/" + booking.bookingId);
+  };
 
   return (
     <tr>
@@ -15,7 +21,7 @@ export default function BookingItem({ booking }) {
       <td>{booking.price.toFixed(2)}</td>
       <td>{formattedDate}</td>
       <td>
-        <button className="btn btn-primary mx-2">View Details</button>
+        <button onClick={handleNavigateBookingDetail} className="btn btn-primary mx-2">View Details</button>
       </td>
     </tr>
   );

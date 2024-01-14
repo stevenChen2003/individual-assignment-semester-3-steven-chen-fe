@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function ShowItem({ show }) {
-  console.log(show);
   const navigate = useNavigate();
 
   const handleDeleteMovie = () => {

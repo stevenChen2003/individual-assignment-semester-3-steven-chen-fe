@@ -47,7 +47,7 @@ export default function BookingDetailPage() {
             </div>
           </div>
 
-          {claims.roles.includes("Customer") && (
+          {claims.roles.includes("Customer") && booking.status == "PAID" && (
             <div className="container mt-3">
               <Button variant="primary">
                 Cancel booking
