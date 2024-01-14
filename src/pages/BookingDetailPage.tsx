@@ -3,10 +3,13 @@ import { useParams } from "react-router-dom";
 import BookingApi from "../api/BookingApi";
 import BookingDetail from "../components/BookingDetail";
 import ShowCard from "../components/adminComponents/ShowCard";
+import { Button } from "react-bootstrap";
+import TokenManager from "../api/TokenManager";
 
 export default function BookingDetailPage() {
   const { id } = useParams();
   const [booking, setBooking] = useState(null);
+  const claims = TokenManager.getClaims();
 
   const getBookingInformation = async () => {
     try {
@@ -43,6 +46,14 @@ export default function BookingDetailPage() {
               <BookingDetail booking={booking} />
             </div>
           </div>
+
+          {claims.roles.includes("Customer") && (
+            <div className="container mt-3">
+              <Button variant="primary">
+                Cancel booking
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </div>
