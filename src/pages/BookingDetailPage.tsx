@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BookingApi from "../api/BookingApi";
 import BookingDetail from "../components/BookingDetail";
 import ShowCard from "../components/adminComponents/ShowCard";
@@ -8,6 +8,7 @@ import TokenManager from "../api/TokenManager";
 
 export default function BookingDetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [booking, setBooking] = useState(null);
   const claims = TokenManager.getClaims();
 
@@ -18,6 +19,15 @@ export default function BookingDetailPage() {
       setBooking(data);
     } catch (error) {
       console.error("Error fetching booking details:", error);
+    }
+  };
+
+  const cancelBooking = async () => {
+    try {
+      await BookingApi.cancelBooking(id);
+      navigate(`/user/${claims.userId}`);
+    } catch (error) {
+      console.error("Error cancelling booking:", error);
     }
   };
 
@@ -47,9 +57,9 @@ export default function BookingDetailPage() {
             </div>
           </div>
 
-          {claims.roles.includes("Customer") && booking.status == "PAID" && new Date(booking.showtime.endtime) > new Date() && (
+          {claims.roles.includes("Customer") && booking.status == "PAID" && new Date(booking.showtime.endTime) > new Date() && (
             <div className="container mt-3">
-              <Button variant="primary">
+              <Button variant="primary" onClick={cancelBooking}>
                 Cancel booking
               </Button>
             </div>
