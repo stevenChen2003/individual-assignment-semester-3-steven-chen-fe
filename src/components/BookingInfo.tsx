@@ -50,14 +50,16 @@ const BookingInformation = ({ selectedSeats, showtime }) => {
       <Card>
         <Card.Body>
           <Card.Title>Booking Information</Card.Title>
+          <hr></hr>
           <Card.Text>
             <strong>Selected Seats:</strong>
+            <br></br>
             {selectedSeats.length === 0 ? (
               <span> No seats selected</span>
             ) : (
               <ul>
-                {selectedSeats.map((seatId) => (
-                  <li key={seatId}>Seat {seatId}</li>
+                {selectedSeats.map((seat) => (
+                  <li key={seat.seatId}>Seat: {seat.rowNumber}-{seat.seatNumber}</li>
                 ))}
               </ul>
             )}

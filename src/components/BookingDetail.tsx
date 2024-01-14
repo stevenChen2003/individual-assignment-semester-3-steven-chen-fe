@@ -8,7 +8,7 @@ export default function BookingDetail({ booking }) {
       <strong>Selected Seats:</strong>
       <ul>
         {booking.seatList.map((seat) => (
-          <li key={seat.seatId}>Seat {seat.seatId}</li>
+          <li key={seat.seatId}>Seat: {seat.rowNumber}-{seat.seatNumber}</li>
         ))}
       </ul>
       <strong>Status:</strong> {booking.status}

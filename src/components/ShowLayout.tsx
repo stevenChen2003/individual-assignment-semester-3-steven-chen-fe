@@ -26,9 +26,9 @@ const ShowLayout = ({ seats, selectedSeats, handleSeatClick}) => {
               disabled={seat.status == 'BOOKED'}
               className={`h-100 ${seat.status == 'BOOKED' ? 'unavailable-seat' : ''}`}
               variant={
-               selectedSeats.includes(seat.seatId) ? "primary" : "secondary"
+               selectedSeats.includes(seat) ? "primary" : "secondary"
               }
-              onClick={() => handleSeatClick(seat.seatId)}
+              onClick={() => handleSeatClick(seat)}
             >
               {`${seat.rowNumber}-${seat.seatNumber}`}
             </Button>
