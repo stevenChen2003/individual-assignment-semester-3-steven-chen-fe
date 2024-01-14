@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Button, Form, Modal } from "react-bootstrap";
 import ShowtimeApi from "../../api/ShowtimeApi";
@@ -7,7 +7,7 @@ export default function EditForm({
   show,
   onHide,
   initialShowtime,
-  getShowInformation,
+  onRedirect
 }) {
   const [showtime, setShowtime] = useState(initialShowtime);
 
@@ -33,9 +33,8 @@ export default function EditForm({
     };
     console.log("For", formattedShowtime);
     ShowtimeApi.updateShowtime(formattedShowtime);
-    setShowtime(initialShowtime);
-    getShowInformation();
     onHide();
+    onRedirect();
   };
 
   return (

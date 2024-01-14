@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ShowtimeApi from "../../api/ShowtimeApi";
 import ShowCard from "../../components/adminComponents/ShowCard";
 import ShowLayout from "../../components/ShowLayout";
 import EditForm from "../../components/adminComponents/EditShowForm";
+import { Button } from "react-bootstrap";
 
 export default function ShowDetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [showtime, setShowtime] = useState(null);
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -31,7 +33,7 @@ export default function ShowDetailPage() {
 
   useEffect(() => {
     getShowInformation();
-  }, [id, showtime]);
+  }, []);
 
   const handleSeatClick = (seatId) => {
     setSelectedSeats((prevSeats) => {
@@ -48,6 +50,11 @@ export default function ShowDetailPage() {
   const openEditForm = () => {
     setIsEditFormOpen(true);
   };
+
+  const handleRedirect = () => {
+    navigate(`/admin/showtime`);
+  };
+  
 
   return (
     <div className="container mt-4">
@@ -68,14 +75,15 @@ export default function ShowDetailPage() {
                 selectedSeats={selectedSeats}
                 handleSeatClick={handleSeatClick}
               />
-              <button onClick={openEditForm}>Edit Time</button>
+              <Button onClick={openEditForm}>Edit Time</Button>
             </div>
           </div>
           {isEditFormOpen && (
             <EditForm
-                show={isEditFormOpen}
-                onHide={() => setIsEditFormOpen(false)}
-                initialShowtime={showtime} getShowInformation={getShowInformation}              
+              show={isEditFormOpen}
+              onHide={() => setIsEditFormOpen(false)}
+              initialShowtime={showtime}
+              onRedirect={handleRedirect}
             />
           )}
         </div>
