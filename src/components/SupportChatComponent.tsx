@@ -1,11 +1,12 @@
 import { Client } from "@stomp/stompjs";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SendMessagePlaceholder from "./commonComponents/SendMessagePlaceholder";
 import ChatMessagesPlaceholder from "./commonComponents/ChatMessagesPlaceholder";
 import MovieSelect from "./MovieSelect";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import TokenManager from "../api/TokenManager";
 import { ToastContainer, toast } from "react-toastify";
+import ChatApi from "../api/ChatApi";
 
 export default function SupportChatComponent() {
   const [movieId, setMovieId] = useState();
@@ -14,6 +15,18 @@ export default function SupportChatComponent() {
   const [username, setUsername] = useState();
   const [messagesReceived, setMessagesReceived] = useState([]);
   const claims = TokenManager.getClaims();
+
+  useEffect(() => {
+    if (movieId) {
+      fetchMessages();
+    }
+  }, [movieId]);
+
+  const fetchMessages = () => {
+    ChatApi.getAllChatMessages(movieId)
+      .then((messages) => setMessagesReceived(messages))
+      .catch((error) => console.error("Error fetching messages", error));
+  };
 
   const handleSelect = (selectedMovie) => {
     setMovie(selectedMovie);
@@ -52,12 +65,14 @@ export default function SupportChatComponent() {
       from: username,
       text: newMessage.text,
       movieId: movieId,
+      date: new Date(),
     };
 
-    stompClient.publish({
-      destination: `/topic/movie/${movieId}`,
-      body: JSON.stringify(payload),
-    });
+    ChatApi.sendChatMessage(payload)
+      .then(() => {
+        // Optionally update the UI or perform additional actions after sending the message
+      })
+      .catch((error) => console.error("Error sending message", error));
   };
 
   // display the received data
@@ -120,12 +135,12 @@ export default function SupportChatComponent() {
                   username={username}
                   messagesReceived={messagesReceived}
                 />
-                <hr/>
+                <hr />
                 <div className="container">
-                <SendMessagePlaceholder
-                  username={username}
-                  onMessageSend={sendMessage}
-                />
+                  <SendMessagePlaceholder
+                    username={username}
+                    onMessageSend={sendMessage}
+                  />
                 </div>
               </Col>
             </Row>
