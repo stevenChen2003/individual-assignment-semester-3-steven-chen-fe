@@ -19,6 +19,15 @@ const ShowtimeApi = {
       .get(`/showtime/cinema?cinemaId=${cinemaId}&day=${day}`)
       .then((response) => response.data),
 
+  getShowtimeByCinemaAndMovieAndDay: (
+    cinemaId: any,
+    movieId: any,
+    day: string
+  ) =>
+    axios
+      .get(`/showtime/movies?cinemaId=${cinemaId}&movieId=${movieId}&day=${day}`)
+      .then((response) => response.data),
+
   getShowtime: (showtimeId: any) =>
     axios.get(`/showtime/${showtimeId}`).then((response) => response.data),
 
