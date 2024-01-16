@@ -8,7 +8,7 @@ import TokenManager from "../api/TokenManager";
 import { ToastContainer, toast } from "react-toastify";
 import ChatApi from "../api/ChatApi";
 
-export default function SupportChatComponent() {
+export default function ChatComponent() {
   const [movieId, setMovieId] = useState();
   const [movie, setMovie] = useState();
   const [stompClient, setStompClient] = useState();

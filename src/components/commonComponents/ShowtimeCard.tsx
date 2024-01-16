@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import CinemaApi from "../../api/CinemaApi";
 
 export default function ShowtimeCard({ showtime }) {
+  const [cinema, setCinema] = useState('');
   const formattedStartTime = new Date(showtime.startTime).toLocaleTimeString(
     "nl-NL",
     {
@@ -25,8 +27,20 @@ export default function ShowtimeCard({ showtime }) {
     year: "numeric",
   });
 
+  useEffect(() => {
+    console.log(showtime);
+    console.log(showtime.hall.cinemaId);
+    CinemaApi.getCinema(showtime.hall.cinemaId)
+        .then((response) => {
+          setCinema(response.name);
+        })
+        .catch((error) => {
+          console.error("Error fetching cinema details:", error);
+        });
+  }, []);
+
   return (
-    <Card className="container">
+    <Card className="container mb-4">
       <Row>
         <Col className="m-2 border-end border-3 border-grey" md="5">
           <Card.Title>{showtime.movie.title}</Card.Title>
@@ -45,6 +59,11 @@ export default function ShowtimeCard({ showtime }) {
             <strong>End Time:</strong> {formattedEndTime}
             <br />
             <strong>Price per Seat:</strong> {showtime.pricePerSeat.toFixed(2)}
+          </Card.Text>
+          <Card.Text>
+            <strong>Location:</strong> {cinema}
+            <br />
+            <strong>Hall Number:</strong> {showtime.hall.hallNumber}
           </Card.Text>
         </Col>
       </Row>

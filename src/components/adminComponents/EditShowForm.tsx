@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Button, Form, Modal } from "react-bootstrap";
 import ShowtimeApi from "../../api/ShowtimeApi";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function EditForm({
   show,
@@ -32,13 +33,24 @@ export default function EditForm({
       ),
     };
     console.log("For", formattedShowtime);
-    ShowtimeApi.updateShowtime(formattedShowtime);
-    onHide();
-    onRedirect();
+    ShowtimeApi.updateShowtime(formattedShowtime)
+    .then((response) => {
+      console.log(response);
+      onHide();
+      onRedirect();
+    })
+    .catch((error) => {
+      console.error("Error creating show:", error);
+      toast.error("There is time conflict with other shows", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 2000,
+      });
+    });
   };
 
   return (
     <Modal show={show} onHide={onHide} centered>
+      <ToastContainer/>
       <Modal.Header closeButton>
         <Modal.Title>Edit Showtime</Modal.Title>
       </Modal.Header>

@@ -1,11 +1,11 @@
 import React from "react";
-import SupportChatComponent from "../components/SupportChatComponent";
+import ChatComponent from "../components/ChatComponent";
 
 export default function ChatPage() {
   return (
     <div className="container-fluid">
       <div className="container">
-        <SupportChatComponent />
+        <ChatComponent />
       </div>
     </div>
   );
