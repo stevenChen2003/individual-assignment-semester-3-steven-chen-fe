@@ -17,7 +17,6 @@ const BookingInformation = ({ selectedSeats, showtime }) => {
   const handleProceedToPayment = async () => {
     setIsPaymentSuccessful(true);
     const showSeatIds = selectedSeats.map(seat => seat.seatId);
-    console.log("Selected seats", showSeatIds)
     const claims = TokenManager.getClaims();
     const bookingRequest = {
       userId: claims.userId,
