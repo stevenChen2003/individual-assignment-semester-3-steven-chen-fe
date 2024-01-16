@@ -79,6 +79,14 @@ export default function ShowtimeForm({ show, onHide }) {
     console.log(showtime);
   };
 
+  const isSameDay = (date1, date2) => {
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    );
+  };
+
   const handleAddShow = () => {
     console.log("Showtime", showtime);
     const formattedShowtime = {
@@ -86,6 +94,31 @@ export default function ShowtimeForm({ show, onHide }) {
       startTime: format(new Date(showtime.startTime), "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"),
       endTime: format(new Date(showtime.endTime), "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"),
     };
+    if (formattedShowtime.startTime >= formattedShowtime.endTime) {
+      toast.error("Start time must be before end time", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 2000,
+      });
+
+      return;
+    }
+
+    // Check if start time and end time are on the same day
+    const sameDay = isSameDay(
+      new Date(formattedShowtime.startTime),
+      new Date(formattedShowtime.endTime)
+    );
+
+    if (!sameDay) {
+      console.log("Start time and end time must be on the same day");
+
+      // Show an error toast
+      toast.error("Start time and end time must be on the same day", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 2000,
+      });
+      return;
+    }
     // Make the API call here
     ShowtimeApi.addShowtime(formattedShowtime)
       .then((response) => {

@@ -8,7 +8,7 @@ export default function EditForm({
   show,
   onHide,
   initialShowtime,
-  onRedirect
+  onRedirect,
 }) {
   const [showtime, setShowtime] = useState(initialShowtime);
 
@@ -16,6 +16,14 @@ export default function EditForm({
     setShowtime({ ...showtime, [e.target.name]: e.target.value });
   };
 
+  const isSameDay = (date1, date2) => {
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    );
+  };
+  
   const handleSave = () => {
     console.log("Tets", showtime);
     const formattedShowtime = {
@@ -32,7 +40,33 @@ export default function EditForm({
         "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
       ),
     };
-    console.log("For", formattedShowtime);
+
+    if (formattedShowtime.startTime >= formattedShowtime.endTime) {
+      toast.error("Start time must be before end time", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 2000,
+      });
+
+      return;
+    }
+
+    // Check if start time and end time are on the same day
+    const sameDay = isSameDay(
+      new Date(formattedShowtime.startTime),
+      new Date(formattedShowtime.endTime)
+    );
+
+    if (!sameDay) {
+      console.log("Start time and end time must be on the same day");
+
+      // Show an error toast
+      toast.error("Start time and end time must be on the same day", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 2000,
+      });
+      return;
+    }
+    
     ShowtimeApi.updateShowtime(formattedShowtime)
     .then((response) => {
       console.log(response);
@@ -50,7 +84,7 @@ export default function EditForm({
 
   return (
     <Modal show={show} onHide={onHide} centered>
-      <ToastContainer/>
+      <ToastContainer />
       <Modal.Header closeButton>
         <Modal.Title>Edit Showtime</Modal.Title>
       </Modal.Header>

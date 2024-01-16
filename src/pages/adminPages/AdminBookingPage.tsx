@@ -29,7 +29,7 @@ export default function AdminBookingPage() {
   };
 
   const handleSearch = () => {
-    setCurrentPage(1);
+    setCurrentPage(0);
     fetchAllBookings();
   };
 
