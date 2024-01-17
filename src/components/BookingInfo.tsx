@@ -4,18 +4,17 @@ import BookingApi from "../api/BookingApi";
 import TokenManager from "../api/TokenManager";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import StripeButton from "./commonComponents/StripeButton";
 
 const BookingInformation = ({ selectedSeats, showtime }) => {
-  const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
   const navigate = useNavigate();
 
   const calculateTotalAmount = () => {
     const totalAmount = selectedSeats.length * showtime.pricePerSeat;
-    return totalAmount.toFixed(2); // Format to two decimal places
+    return totalAmount.toFixed(2);
   };
 
   const handleProceedToPayment = async () => {
-    setIsPaymentSuccessful(true);
     const showSeatIds = selectedSeats.map(seat => seat.seatId);
     const claims = TokenManager.getClaims();
     const bookingRequest = {
@@ -28,20 +27,15 @@ const BookingInformation = ({ selectedSeats, showtime }) => {
     try {
       await BookingApi.addBooking(bookingRequest);
       console.log("Booking successful!", bookingRequest);
-      toast.success("Payment Successful!", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 2000,
-      });
       setTimeout(() => {
         navigate("/");
       }, 2000);
     } catch (error) {
       console.error("Error during booking:", error);
-      toast.error("Please select seats", {
+      toast.error("Error during booking", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 2000,
       });
-      setIsPaymentSuccessful(false);
     }
   };
 
@@ -68,9 +62,11 @@ const BookingInformation = ({ selectedSeats, showtime }) => {
           <Card.Text>
             <strong>Total Amount:</strong> {calculateTotalAmount()}
           </Card.Text>
-          <Button variant="primary" onClick={handleProceedToPayment} disabled={isPaymentSuccessful}>
-            Proceed to Payment
-          </Button>
+          {selectedSeats.length > 0 ? (
+           <StripeButton price={calculateTotalAmount()} handleProceedToPayment={handleProceedToPayment} />
+         ) : (
+           <span>Please select a seat before proceeding to payment.</span>
+         )}
         </Card.Body>
       </Card>
     </>
