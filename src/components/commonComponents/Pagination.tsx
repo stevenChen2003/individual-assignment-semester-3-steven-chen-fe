@@ -24,7 +24,7 @@ const PaginationComponent = ({ currentPage, totalPages, onPageChange }) => {
    items.push(<Pagination.Next key="next" onClick={() => onPageChange(currentPage + 2)} />);
  }
 
- return <Pagination>{items}</Pagination>;
+ return <Pagination className='mt-3'>{items}</Pagination>;
 };
 
 export default PaginationComponent;
