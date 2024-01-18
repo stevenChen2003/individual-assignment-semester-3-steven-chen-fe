@@ -29,7 +29,7 @@ const MovieCard = ({ id, title, genre, imageURL }) => {
         alt={title}
         style={{ height: imageHeight, objectFit: 'cover' }}
       />
-      <Card.Body style={{ height: '80px' }}>
+      <Card.Body style={{ height: '100px' }}>
         <Card.Title>{title}</Card.Title>
         <Card.Text>Genre: {genre}</Card.Text>
       </Card.Body>
