@@ -65,7 +65,7 @@ function App() {
           <Route
             path="/show/:id"
             element={
-              <PrivateRoute roles={["Admin", "Customer"]}>
+              <PrivateRoute roles={["Customer"]}>
                 <ShowtimeDetailPage />
               </PrivateRoute>
             }

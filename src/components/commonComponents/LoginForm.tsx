@@ -26,7 +26,12 @@ export default function LoginForm() {
       AuthAPI.login(email, password)
       .then((response) => {
         console.log(response);
-        navigate('/');
+        const claims = TokenManager.getClaims();
+        if (claims.roles == "Admin") {
+          navigate('/admin/movie');
+        } else {
+          navigate('/');
+        }
         // showToast("Login Successful", "success");
         // setTimeout(() => {
         //   navigate('/');

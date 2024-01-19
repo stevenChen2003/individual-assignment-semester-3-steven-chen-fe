@@ -47,11 +47,6 @@ export default function NavBar() {
           id="navbarNav"
         >
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/">
-                Home
-              </Link>
-            </li>
             {isLoggedIn ? (
               <>
                 {claims.roles.includes("Admin") ? (
