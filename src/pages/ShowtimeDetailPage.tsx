@@ -73,7 +73,7 @@ export default function ShowtimeDetailPage() {
                   handleSeatClick={handleSeatClick}
                 />
               </div>
-              <div className="row">
+              <div className="row mt-5">
                 <BookingInformation
                   selectedSeats={selectedSeats}
                   showtime={showtime}
