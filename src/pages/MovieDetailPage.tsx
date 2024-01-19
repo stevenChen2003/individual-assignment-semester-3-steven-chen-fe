@@ -147,31 +147,41 @@ const MovieDetailPage = () => {
               <p>
                 <strong>Description:</strong> {movie.description}
               </p>
-              <Button variant="secondary" className="mt-3"onClick={handleSearchShows}>Look for Shows</Button>
+              <Button
+                variant="secondary"
+                className="mt-3"
+                onClick={handleSearchShows}
+              >
+                Look for Shows
+              </Button>
             </Col>
           </Row>
         </Container>
       </div>
       <div className="container p-3" ref={resultsRef}>
-          <div className="row mt-3 vh-100">
-            <div className="col-4 border-end border-dark">
-              <h3>Cinema:</h3>
-              <CinemaSelect
-                cinemas={cinemas}
-                onSelect={handleSelect}
-                selectedCinema={cinema}
-              />
-            </div>
-            <div className="col-8">
-              <WeeklyCalendar onDateSelect={handleDateSelect} />
-              <hr />
-              <h2>Showtimes</h2>
-              <div>
+        <div className="row mt-3 vh-100">
+          <div className="col-4 border-end border-dark">
+            <h3>Cinema:</h3>
+            <CinemaSelect
+              cinemas={cinemas}
+              onSelect={handleSelect}
+              selectedCinema={cinema}
+            />
+          </div>
+          <div className="col-8">
+            <WeeklyCalendar onDateSelect={handleDateSelect} />
+            <hr />
+            <h2>Showtimes</h2>
+            <div>
+              {showtimes.length === 0 ? (
+                <p>No shows found</p>
+              ) : (
                 <ShowList showtimes={showtimes} />
-              </div>
+              )}
             </div>
           </div>
         </div>
+      </div>
     </>
   );
 };

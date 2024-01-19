@@ -59,10 +59,10 @@ export default function CinemaPage() {
   useEffect(() => {
     if (cinema.cinemaId && date) {
       ShowtimeApi.getShowtimeByCinemaAndDate(cinema.cinemaId, date)
-        .then(response => {
+        .then((response) => {
           setShowtimes(response);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Error fetching showtimes:", error);
         });
     }
@@ -70,11 +70,9 @@ export default function CinemaPage() {
 
   const handleDateSelect = (date) => {
     console.log("Selected date:", date);
-    setDate(date.toISOString().split('T')[0]);
+    setDate(date.toISOString().split("T")[0]);
     // Display shows based on the selected date
   };
-
-
 
   return (
     <div className="container-fluid">
@@ -94,7 +92,11 @@ export default function CinemaPage() {
             <hr />
             <h2>Showtimes</h2>
             <div>
-              <ShowList showtimes={showtimes} />
+              {showtimes.length === 0 ? (
+                <p>No shows found</p>
+              ) : (
+                <ShowList showtimes={showtimes} />
+              )}
             </div>
           </div>
         </div>
