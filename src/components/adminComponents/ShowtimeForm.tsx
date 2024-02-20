@@ -8,7 +8,7 @@ import MovieApi from "../../api/MovieApi";
 import ShowtimeApi from "../../api/ShowtimeApi";
 import { ToastContainer, toast } from "react-toastify";
 
-export default function ShowtimeForm({ show, onHide }) {
+export default function ShowtimeForm({ show, onHide, refresh }) {
   const [cinemas, setCinemas] = useState([]);
   const [halls, setHalls] = useState([]);
   const [movies, setMovies] = useState([]);
@@ -133,6 +133,7 @@ export default function ShowtimeForm({ show, onHide }) {
         });
         setSelectedCinema(null);
         onHide();
+        refresh(1);
       })
       .catch((error) => {
         console.error("Error creating show:", error);

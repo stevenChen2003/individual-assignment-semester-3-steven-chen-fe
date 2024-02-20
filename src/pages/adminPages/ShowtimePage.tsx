@@ -121,7 +121,7 @@ export default function ShowtimePage() {
           </div>
         </div>
 
-        <ShowtimeForm show={show} onHide={handleClose} />
+        <ShowtimeForm show={show} onHide={handleClose} refresh={handlePageChange} />
       </div>
     </div>
   );

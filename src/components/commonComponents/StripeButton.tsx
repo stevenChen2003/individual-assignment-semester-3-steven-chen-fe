@@ -21,6 +21,7 @@ const StripeButton = ({ price, handleProceedToPayment }) => {
         },
       })
       .then((response) => {
+        console.log("Test",response);
         toast.success('Payment success');
         handleProceedToPayment();
       })
